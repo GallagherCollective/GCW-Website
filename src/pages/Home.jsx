@@ -1,6 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: '', email: '', phone: '', company: '',
+    employees: '', products: [], message: ''
+  })
+  const [submitted, setSubmitted] = useState(false)
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => {
@@ -12,13 +18,37 @@ export default function Home() {
     return () => observer.disconnect()
   }, [])
 
+  function toggleProduct(p) {
+    setFormData(f => ({
+      ...f,
+      products: f.products.includes(p)
+        ? f.products.filter(x => x !== p)
+        : [...f.products, p]
+    }))
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const subject = `GCW Inquiry from ${formData.name} — ${formData.company}`
+    const body = `Name: ${formData.name}
+Company: ${formData.company}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Employees: ${formData.employees}
+Interested In: ${formData.products.join(', ')}
+Message: ${formData.message}`
+    window.location.href = `mailto:info@gallaghercollectiveworks.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    setSubmitted(true)
+  }
+
   const services = [
     {
       icon: '👥',
       title: 'Workforce Solutions',
-      desc: 'We simplify how businesses manage their people. From HR systems to onboarding workflows, scheduling, and compliance — we build the operational infrastructure that lets your team thrive.',
+      desc: 'We simplify how businesses manage their staff. From HR systems to onboarding workflows, scheduling, and compliance — we build the operational infrastructure that lets your team thrive.',
       items: ['HR portal implementation', 'Employee onboarding systems', 'Policy & compliance management', 'Timekeeping & scheduling', 'Performance tracking'],
       color: '#B8734A',
+      featured: true,
     },
     {
       icon: '🎨',
@@ -26,15 +56,19 @@ export default function Home() {
       desc: 'We elevate brands through intentional design. Custom artwork, brand identity, murals, and creative projects that make your business look as good as it runs.',
       items: ['Brand identity & logo design', 'Custom artwork & murals', 'Marketing design & collateral', 'Business card & print design', 'Creative project consultation'],
       color: '#4A6B8A',
+      featured: false,
     },
   ]
 
   const products = [
     { icon: '👥', name: 'Collective Staff', desc: 'Complete HR portal for small businesses', status: 'Live Now', color: '#B8734A', url: 'https://collectivestaff.app' },
-    { icon: '🍽️', name: 'Collective Hospitality', desc: 'Restaurant management & tip tracking', status: 'Coming May 2025', color: '#4A7C59', url: null },
+    { icon: '🍽️', name: 'Collective Hospitality', desc: 'Restaurant management & tip tracking', status: 'Coming Soon', color: '#4A7C59', url: null },
     { icon: '🚛', name: 'Collective Fleet', desc: 'Vehicle & transportation management', status: 'In Development', color: '#4A6B8A', url: null },
     { icon: '⏱️', name: 'Collective Time', desc: 'Timekeeping for hourly workforces', status: 'In Development', color: '#6B7D6B', url: null },
   ]
+
+  const productOptions = ['Collective Staff', 'Collective Hospitality', 'Collective Fleet', 'Collective Time', 'Creative Art Services', 'Not sure yet']
+  const employeeOptions = ['1–10', '11–25', '26–50', '51–100', '100–250', '250+']
 
   return (
     <div style={{ fontFamily: "'Montserrat', sans-serif", background: '#F7F2EB', minHeight: '100vh' }}>
@@ -55,10 +89,16 @@ export default function Home() {
         .outline-btn:hover { background: rgba(184,115,74,0.08); }
         .service-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 16px; padding: 2.5rem; transition: all 0.25s; }
         .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(43,43,43,0.1); }
-        .product-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 12px; padding: 1.5rem; transition: all 0.2s; cursor: pointer; }
-        .product-card:hover { transform: translateY(-3px); border-color: #B8734A; box-shadow: 0 6px 24px rgba(184,115,74,0.1); }
+        .service-card.featured { border: 2px solid #B8734A; }
+        .product-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(217,195,163,0.1); border-radius: 12px; padding: 1.5rem; transition: all 0.2s; position: relative; }
+        .product-card.clickable { cursor: pointer; }
+        .product-card.clickable:hover { background: rgba(184,115,74,0.1); border-color: #B8734A; transform: translateY(-3px); }
         .divider { width: 48px; height: 2px; background: #B8734A; margin: 1rem 0; }
         .check-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; color: #4A4A4A; }
+        .form-input { width: 100%; padding: 10px 14px; border: 1px solid #EDE6DA; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 13px; color: #2B2B2B; outline: none; background: #fff; transition: border-color 0.2s; }
+        .form-input:focus { border-color: #B8734A; }
+        .product-chip { padding: 7px 14px; border: 1px solid #EDE6DA; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; background: #fff; color: #4A4A4A; font-family: 'Montserrat', sans-serif; }
+        .product-chip.selected { background: rgba(184,115,74,0.1); border-color: #B8734A; color: #B8734A; font-weight: 600; }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
         .float { animation: float 4s ease-in-out infinite; }
       `}</style>
@@ -77,7 +117,7 @@ export default function Home() {
           <a href="#products" className="nav-link">Products</a>
           <a href="#about" className="nav-link">About</a>
           <a href="#contact" className="nav-link">Contact</a>
-          <a href="https://collectivestaff.app" className="primary-btn" style={{ padding: '8px 18px' }}>Collective Staff →</a>
+          <a href="https://collectivestaff.app" target="_blank" rel="noreferrer" className="primary-btn" style={{ padding: '8px 18px' }}>Collective Staff →</a>
         </div>
       </nav>
 
@@ -99,7 +139,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Hero visual */}
         <div className="reveal reveal-delay-2" style={{ position: 'relative' }}>
           <div className="float" style={{ background: '#2B2B2B', borderRadius: 20, padding: '2.5rem', textAlign: 'center', boxShadow: '0 20px 60px rgba(43,43,43,0.2)' }}>
             <div style={{ width: 72, height: 72, borderRadius: '50%', border: '2.5px solid #B8734A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Playfair Display, serif', fontSize: 22, fontWeight: 700, color: '#B8734A', margin: '0 auto 1.25rem' }}>GCW</div>
@@ -112,7 +151,7 @@ export default function Home() {
                 <span style={{ fontSize: 13, color: 'rgba(217,195,163,0.6)', fontWeight: 500 }}>{label}</span>
               </div>
             ))}
-            <div style={{ marginTop: '1.5rem', fontSize: 11, color: 'rgba(217,195,163,0.3)' }}>Tiffany & John Gallagher · Co-Owners</div>
+            <div style={{ marginTop: '1.5rem', fontSize: 11, color: 'rgba(217,195,163,0.3)' }}>John & Tiffany Gallagher · Co-Owners</div>
           </div>
           <div style={{ position: 'absolute', top: -14, right: -14, background: '#B8734A', color: '#fff', borderRadius: 10, padding: '8px 14px', fontSize: 11, fontWeight: 600 }}>
             Based in Ellsworth, ME
@@ -136,11 +175,16 @@ export default function Home() {
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#B8734A', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>What we do</div>
           <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#2B2B2B', marginBottom: '1rem' }}>Two things. Done exceptionally well.</h2>
-          <p className="reveal reveal-delay-2" style={{ fontSize: 14, color: '#6B7D6B', maxWidth: 480, margin: '0 auto', lineHeight: 1.8 }}>Tiffany and John Gallagher blend operational expertise with creative design — helping businesses function beautifully and feel inspired.</p>
+          <p className="reveal reveal-delay-2" style={{ fontSize: 14, color: '#6B7D6B', maxWidth: 480, margin: '0 auto', lineHeight: 1.8 }}>John and Tiffany Gallagher blend business strategy with operational expertise and creative design — helping businesses function beautifully and feel inspired.</p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
           {services.map((s, i) => (
-            <div key={s.title} className={`service-card reveal reveal-delay-${i + 1}`}>
+            <div key={s.title} className={`service-card reveal reveal-delay-${i + 1} ${s.featured ? 'featured' : ''}`}>
+              {s.featured && (
+                <div style={{ display: 'inline-block', background: 'rgba(184,115,74,0.1)', border: '1px solid rgba(184,115,74,0.3)', borderRadius: 20, padding: '3px 12px', fontSize: 10, fontWeight: 600, color: '#B8734A', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                  Our Core Service
+                </div>
+              )}
               <div style={{ fontSize: 36, marginBottom: '1rem' }}>{s.icon}</div>
               <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', fontWeight: 600, color: '#2B2B2B', marginBottom: '0.5rem' }}>{s.title}</h3>
               <div className="divider" style={{ background: s.color }} />
@@ -153,6 +197,11 @@ export default function Home() {
                   {item}
                 </div>
               ))}
+              <div style={{ marginTop: '1.5rem' }}>
+                <a href="#contact" className="primary-btn" style={{ background: s.color, fontSize: 12, padding: '9px 20px' }}>
+                  Learn More →
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -168,11 +217,9 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: '2rem' }}>
             {products.map((p, i) => (
-              <div key={p.name} className={`reveal reveal-delay-${i + 1}`}
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(217,195,163,0.1)', borderRadius: 12, padding: '1.5rem', cursor: p.url ? 'pointer' : 'default', transition: 'all 0.2s', position: 'relative' }}
-                onClick={() => p.url && window.open(p.url, '_blank')}
-                onMouseEnter={e => { if(p.url) { e.currentTarget.style.background = 'rgba(184,115,74,0.1)'; e.currentTarget.style.borderColor = '#B8734A'; }}}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(217,195,163,0.1)'; }}>
+              <div key={p.name}
+                className={`product-card reveal reveal-delay-${i + 1} ${p.url ? 'clickable' : ''}`}
+                onClick={() => p.url && window.open(p.url, '_blank')}>
                 {p.status === 'Live Now' && (
                   <div style={{ position: 'absolute', top: 10, right: 10, background: '#B8734A', color: '#fff', fontSize: 9, fontWeight: 600, padding: '2px 8px', borderRadius: 10, letterSpacing: '0.08em' }}>LIVE</div>
                 )}
@@ -183,6 +230,7 @@ export default function Home() {
                   <div style={{ width: 5, height: 5, borderRadius: '50%', background: p.color }} />
                   {p.status}
                 </div>
+                {p.url && <div style={{ marginTop: '0.75rem', fontSize: 11, color: 'rgba(184,115,74,0.6)' }}>Click to visit →</div>}
               </div>
             ))}
           </div>
@@ -191,7 +239,7 @@ export default function Home() {
               <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Try Collective Staff today — free demo available</div>
               <div style={{ fontSize: 12, color: 'rgba(217,195,163,0.5)' }}>HR portal for small businesses · Starting at $49/mo · No setup fee</div>
             </div>
-            <a href="https://collectivestaff.app" className="primary-btn" style={{ whiteSpace: 'nowrap' }}>Visit collectivestaff.app →</a>
+            <a href="https://collectivestaff.app" target="_blank" rel="noreferrer" className="primary-btn" style={{ whiteSpace: 'nowrap' }}>Visit collectivestaff.app →</a>
           </div>
         </div>
       </section>
@@ -202,17 +250,17 @@ export default function Home() {
           <div>
             <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#B8734A', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>About GCW</div>
             <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.2rem', fontWeight: 700, color: '#2B2B2B', lineHeight: 1.2, marginBottom: '1.25rem' }}>
-              Tiffany & John Gallagher.<br /><em style={{ color: '#B8734A' }}>Built for small business.</em>
+              John & Tiffany Gallagher.<br /><em style={{ color: '#B8734A' }}>Built for small business.</em>
             </h2>
             <p className="reveal reveal-delay-2" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1rem' }}>
-              We are a husband-and-wife team based in Ellsworth, Maine. Tiffany brings years of workforce operations expertise — building systems that help small businesses manage their people effectively. John brings creative vision and business strategy.
+              We are a husband-and-wife team based in Ellsworth, Maine. John brings business strategy and creative vision — leading with direction and purpose. Tiffany brings years of workforce operations expertise — building systems that help small businesses manage their staff effectively.
             </p>
             <p className="reveal reveal-delay-3" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1.5rem' }}>
-              Together, we founded Gallagher Collective Works because we saw small businesses struggling with tools built for enterprises — expensive, complicated, and impersonal. We build better ones.
+              Together, we founded Gallagher Collective Works because we saw small businesses struggling with tools built for enterprises — expensive, complicated, and impersonal. Built to Work. Made for You.
             </p>
             <div className="reveal reveal-delay-4" style={{ display: 'flex', gap: 12 }}>
               <a href="#contact" className="primary-btn">Get in Touch →</a>
-              <a href="https://collectivestaff.app" className="outline-btn">See Our Work</a>
+              <a href="https://collectivestaff.app" target="_blank" rel="noreferrer" className="outline-btn">See Our Work</a>
             </div>
           </div>
           <div className="reveal reveal-delay-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -231,34 +279,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
+      {/* Contact Form */}
       <section id="contact" style={{ background: '#2B2B2B', padding: '5rem 2rem' }}>
-        <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center' }}>
-          <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#B8734A', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>Let's work together</div>
-          <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#fff', marginBottom: '1rem' }}>Ready to simplify your operations?</h2>
-          <p className="reveal reveal-delay-2" style={{ fontSize: 14, color: 'rgba(217,195,163,0.5)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Whether you need HR systems, creative design, or a custom software solution — we would love to hear about your business. Let's find out how GCW can help.
-          </p>
-          <div className="reveal reveal-delay-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14, marginBottom: '2rem' }}>
-            {[
-              { icon: '💼', label: 'Workforce Solutions', sub: 'HR systems & operations' },
-              { icon: '🎨', label: 'Creative Services', sub: 'Design & branding' },
-              { icon: '💻', label: 'Collective Platform', sub: 'SaaS products' },
-            ].map(c => (
-              <a key={c.label} href="mailto:info@gallaghercollectiveworks.com" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(217,195,163,0.1)', borderRadius: 12, padding: '1.25rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(184,115,74,0.1)'; e.currentTarget.style.borderColor = '#B8734A'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(217,195,163,0.1)'; }}>
-                <div style={{ fontSize: 24, marginBottom: 8 }}>{c.icon}</div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#fff', marginBottom: 4 }}>{c.label}</div>
-                <div style={{ fontSize: 11, color: 'rgba(217,195,163,0.4)' }}>{c.sub}</div>
-              </a>
-            ))}
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#B8734A', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>Let's work together</div>
+            <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#fff', marginBottom: '1rem' }}>Tell us about your business.</h2>
+            <p className="reveal reveal-delay-2" style={{ fontSize: 14, color: 'rgba(217,195,163,0.5)', lineHeight: 1.8 }}>
+              Fill out the form below and we'll be in touch within one business day.
+            </p>
           </div>
-          <div className="reveal reveal-delay-4">
-            <a href="mailto:info@gallaghercollectiveworks.com" className="primary-btn" style={{ fontSize: 14, padding: '14px 36px' }}>
-              info@gallaghercollectiveworks.com →
-            </a>
-          </div>
+
+          {submitted ? (
+            <div className="reveal" style={{ background: 'rgba(74,124,89,0.15)', border: '1px solid #4A7C59', borderRadius: 16, padding: '3rem', textAlign: 'center' }}>
+              <div style={{ fontSize: 48, marginBottom: '1rem' }}>✓</div>
+              <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', color: '#fff', marginBottom: '0.75rem' }}>We'll be in touch!</div>
+              <div style={{ fontSize: 13, color: 'rgba(217,195,163,0.5)', lineHeight: 1.8 }}>Thank you for reaching out to Gallagher Collective Works. John or Tiffany will respond within one business day.</div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(217,195,163,0.1)', borderRadius: 16, padding: '2.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 6 }}>Full Name *</label>
+                  <input className="form-input" required placeholder="Your full name" value={formData.name} onChange={e => setFormData(f => ({...f, name: e.target.value}))} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 6 }}>Company Name</label>
+                  <input className="form-input" placeholder="Your company" value={formData.company} onChange={e => setFormData(f => ({...f, company: e.target.value}))} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 6 }}>Email Address *</label>
+                  <input className="form-input" type="email" required placeholder="your@email.com" value={formData.email} onChange={e => setFormData(f => ({...f, email: e.target.value}))} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 6 }}>Phone Number</label>
+                  <input className="form-input" placeholder="(207) 555-0000" value={formData.phone} onChange={e => setFormData(f => ({...f, phone: e.target.value}))} />
+                </div>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 10 }}>Number of Employees</label>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  {employeeOptions.map(opt => (
+                    <button key={opt} type="button" className={`product-chip ${formData.employees === opt ? 'selected' : ''}`}
+                      onClick={() => setFormData(f => ({...f, employees: opt}))}>
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 10 }}>What are you interested in? (select all that apply)</label>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  {productOptions.map(opt => (
+                    <button key={opt} type="button" className={`product-chip ${formData.products.includes(opt) ? 'selected' : ''}`}
+                      onClick={() => toggleProduct(opt)}>
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: 24 }}>
+                <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 6 }}>Tell us about your business</label>
+                <textarea className="form-input" rows={4} placeholder="What challenges are you facing? What does your team look like? What are you hoping to accomplish?" value={formData.message} onChange={e => setFormData(f => ({...f, message: e.target.value}))} style={{ resize: 'vertical' }} />
+              </div>
+
+              <button type="submit" className="primary-btn" style={{ width: '100%', fontSize: 14, padding: '14px' }}>
+                Send Inquiry → We'll Respond Within One Business Day
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
@@ -267,7 +359,7 @@ export default function Home() {
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
             <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, color: '#fff', fontWeight: 700, marginBottom: 4 }}>Gallagher Collective Works</div>
-            <div style={{ fontSize: 10, color: 'rgba(217,195,163,0.3)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Simplifying Work. Amplifying Results.</div>
+            <div style={{ fontSize: 10, color: 'rgba(217,195,163,0.3)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Built to Work. Made for You.</div>
           </div>
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center' }}>
             {['Services', 'Products', 'About', 'Contact'].map(link => (
@@ -277,7 +369,7 @@ export default function Home() {
                 {link}
               </a>
             ))}
-            <a href="https://collectivestaff.app" style={{ fontSize: 12, color: '#B8734A', textDecoration: 'none', fontWeight: 600 }}>collectivestaff.app →</a>
+            <a href="https://collectivestaff.app" target="_blank" rel="noreferrer" style={{ fontSize: 12, color: '#B8734A', textDecoration: 'none', fontWeight: 600 }}>collectivestaff.app →</a>
           </div>
           <div style={{ fontSize: 11, color: 'rgba(217,195,163,0.25)' }}>© 2025 Gallagher Collective Works LLC</div>
         </div>
