@@ -253,13 +253,13 @@ Message: ${formData.message}`
               John & Tiffany Gallagher.<br /><em style={{ color: '#B8734A' }}>Built for small business.</em>
             </h2>
             <p className="reveal reveal-delay-2" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1rem' }}>
-              John and Tiffany Gallagher are a husband-and-wife team based in Ellsworth, Maine. John brings an extensive background in technology, IT management, and business strategy — translating complex systems into practical solutions and leading implementation with precision and care. He is the architect behind the tools that power Gallagher Collective Works.
+              John and Tiffany Gallagher are a husband-and-wife team based in Ellsworth, Maine. John brings an extensive background in technology, IT management, and business strategy — translating complex systems into practical solutions and leading implementation with precision and care.
             </p>
             <p className="reveal reveal-delay-3" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1rem' }}>
               Tiffany brings over two decades of operational management and human resources expertise — onboarding, compliance, payroll, training, SOP development, team management, and day-to-day operations across organizations of every size. If it touches people and process, Tiffany has not only done it — she has built the system around it.
             </p>
             <p className="reveal reveal-delay-3" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1.5rem' }}>
-              Together, John and Tiffany founded Gallagher Collective Works with a simple belief: small businesses deserve powerful tools without the enterprise price tag or complexity. <strong style={{ color: '#2B2B2B' }}>Gallagher Collective Works — Built to Work. Made for You.</strong>
+              Together, John and Tiffany founded Gallagher Collective Works with a simple belief: small businesses deserve powerful tools without the enterprise price tag or complexity. <br /><strong style={{ color: '#B8734A', display: 'block', marginTop: '0.75rem', fontSize: 14, letterSpacing: '0.05em' }}>Gallagher Collective Works — Built to Work. Made for You.</strong>
             </p>
             <div className="reveal reveal-delay-4" style={{ display: 'flex', gap: 12 }}>
               <a href="#contact" className="primary-btn">Get in Touch →</a>
