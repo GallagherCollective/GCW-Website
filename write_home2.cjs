@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+﻿const fs = require('fs');
+
+const home = `import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Users, UtensilsCrossed, Truck, Timer, Clock, FileText, Calendar, Headphones, FolderOpen, Shield } from 'lucide-react'
 import GCWNav from '../components/GCWNav'
@@ -25,7 +27,7 @@ export default function Home() {
   function handleSubmit(e) {
     e.preventDefault()
     const subject = 'GCW Inquiry from ' + formData.name + ' - ' + formData.company
-    const body = 'Name: ' + formData.name + '\nCompany: ' + formData.company + '\nEmail: ' + formData.email + '\nPhone: ' + formData.phone + '\nEmployees: ' + formData.employees + '\nInterested In: ' + formData.products.join(', ') + '\nMessage: ' + formData.message
+    const body = 'Name: ' + formData.name + '\\nCompany: ' + formData.company + '\\nEmail: ' + formData.email + '\\nPhone: ' + formData.phone + '\\nEmployees: ' + formData.employees + '\\nInterested In: ' + formData.products.join(', ') + '\\nMessage: ' + formData.message
     window.location.href = 'mailto:info@gallaghercollectiveworks.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body)
     setSubmitted(true)
   }
@@ -56,7 +58,7 @@ export default function Home() {
 
   return (
     <div style={{ fontFamily: "'Montserrat', sans-serif", background: '#F7F2EB', minHeight: '100vh' }}>
-      <style>{`
+      <style>{\`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -85,7 +87,7 @@ export default function Home() {
         .feature-item:hover { background: rgba(184,115,74,0.06) !important; }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
         .float { animation: float 4s ease-in-out infinite; }
-      `}</style>
+      \`}</style>
 
       <GCWNav />
 
@@ -173,7 +175,7 @@ export default function Home() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
           {services.map((s, i) => (
-            <div key={s.title} className={`service-card reveal reveal-delay-${i+1} ${s.featured ? 'featured' : ''}`}>
+            <div key={s.title} className={\`service-card reveal reveal-delay-\${i+1} \${s.featured ? 'featured' : ''}\`}>
               {s.featured && <div style={{ display: 'inline-block', background: 'rgba(184,115,74,0.1)', border: '1px solid rgba(184,115,74,0.3)', borderRadius: 20, padding: '3px 12px', fontSize: 10, fontWeight: 600, color: '#B8734A', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Our Core Service</div>}
               <div style={{ width: 48, height: 48, borderRadius: 12, background: s.color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
                 <s.Icon size={24} color={s.color} strokeWidth={1.75} />
@@ -207,7 +209,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: '2rem' }}>
             {products.map((p, i) => (
-              <div key={p.name} className={`product-card reveal reveal-delay-${i+1} ${p.url ? 'clickable' : ''}`} onClick={() => p.url && window.open(p.url, '_blank')}>
+              <div key={p.name} className={\`product-card reveal reveal-delay-\${i+1} \${p.url ? 'clickable' : ''}\`} onClick={() => p.url && window.open(p.url, '_blank')}>
                 {p.status === 'Live Now' && <div style={{ position: 'absolute', top: 10, right: 10, background: '#B8734A', color: '#fff', fontSize: 9, fontWeight: 600, padding: '2px 8px', borderRadius: 10 }}>LIVE</div>}
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: p.iconColor + '18', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
                   <p.Icon size={20} color={p.iconColor} strokeWidth={1.75} />
@@ -292,7 +294,7 @@ export default function Home() {
                 <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 10 }}>Number of Employees</label>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {employeeOptions.map(opt => (
-                    <button key={opt} type="button" className={`product-chip ${formData.employees===opt?'selected':''}`} onClick={() => setFormData(f => ({...f, employees:opt}))}>{opt}</button>
+                    <button key={opt} type="button" className={\`product-chip \${formData.employees===opt?'selected':''}\`} onClick={() => setFormData(f => ({...f, employees:opt}))}>{opt}</button>
                   ))}
                 </div>
               </div>
@@ -300,7 +302,7 @@ export default function Home() {
                 <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 10 }}>What are you interested in?</label>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {productOptions.map(opt => (
-                    <button key={opt} type="button" className={`product-chip ${formData.products.includes(opt)?'selected':''}`} onClick={() => toggleProduct(opt)}>{opt}</button>
+                    <button key={opt} type="button" className={\`product-chip \${formData.products.includes(opt)?'selected':''}\`} onClick={() => toggleProduct(opt)}>{opt}</button>
                   ))}
                 </div>
               </div>
@@ -317,4 +319,7 @@ export default function Home() {
       <GCWFooter />
     </div>
   )
-}
+}`;
+
+fs.writeFileSync('src/pages/Home.jsx', home, 'utf8');
+console.log('Home written! Length:', home.length);
