@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Users, UtensilsCrossed, Truck, Timer, Clock, FileText, Calendar, Headphones, FolderOpen, Shield, Palette } from 'lucide-react'
+import { Users, Palette, Layers } from 'lucide-react'
 import GCWNav from '../components/GCWNav'
 import GCWFooter from '../components/GCWFooter'
 
 export default function Home() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({ name:'', email:'', phone:'', company:'', employees:'', products:[], message:'' })
-  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -18,42 +16,12 @@ export default function Home() {
     return () => observer.disconnect()
   }, [])
 
-  function toggleProduct(p) {
-    setFormData(f => ({ ...f, products: f.products.includes(p) ? f.products.filter(x => x !== p) : [...f.products, p] }))
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    const subject = 'GCW Inquiry from ' + formData.name + ' - ' + formData.company
-    const body = 'Name: ' + formData.name + '\nCompany: ' + formData.company + '\nEmail: ' + formData.email + '\nPhone: ' + formData.phone + '\nEmployees: ' + formData.employees + '\nInterested In: ' + formData.products.join(', ') + '\nMessage: ' + formData.message
-    window.location.href = 'mailto:info@gallaghercollectiveworks.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body)
-    setSubmitted(true)
-  }
-
-  const features = [
-    { Icon: Clock,      color: '#A06535', label: 'Clock In/Out',        desc: 'Live timer, job codes, time log' },
-    { Icon: FileText,   color: '#6B7D6B', label: 'Digital Onboarding',  desc: 'W-4, I-9, e-signatures' },
-    { Icon: Calendar,   color: '#A06535', label: 'Team Calendar',       desc: 'Full CRUD, 9 event types' },
-    { Icon: Headphones, color: '#6B7D6B', label: 'IT Helpdesk',         desc: 'Tickets, change management' },
-    { Icon: FolderOpen, color: '#A06535', label: 'Document Library',    desc: 'Upload, require signature' },
-    { Icon: Shield,     color: '#6B7D6B', label: 'Role System',         desc: 'HR Admin, Supervisor, Staff' },
+  const navCards = [
+    { Icon: Users,   color: '#A06535', title: 'Services',  desc: 'Workforce Solutions & Creative Art Services for small businesses.', path: '/services' },
+    { Icon: Layers,  color: '#6B7D6B', title: 'Platform',  desc: 'The full GCW product suite - Staff, Dining, Hospitality, Fleet & more.', path: '/platform' },
+    { Icon: Palette, color: '#8A7A6A', title: 'About',     desc: 'Meet John & Tiffany Gallagher - built for small business.', path: '/about' },
+    { Icon: Users,   color: '#4A7C59', title: 'Contact',   desc: 'Tell us about your business - we respond within one business day.', path: '/contact' },
   ]
-
-  const services = [
-    { Icon: Users,   title: 'Workforce Solutions',   desc: 'We simplify how businesses manage their staff. From HR systems to onboarding workflows, scheduling, and compliance - we build the operational infrastructure that lets your team thrive.', items: ['HR portal implementation', 'Employee onboarding systems', 'Policy & compliance management', 'Timekeeping & scheduling', 'Performance tracking'], color: '#A06535', featured: true },
-    { Icon: Palette, title: 'Creative Art Services', desc: 'We elevate brands through intentional design. Custom artwork, brand identity, murals, and creative projects that make your business look as good as it runs.', items: ['Brand identity & logo design', 'Custom artwork & murals', 'Marketing design & collateral', 'Business card & print design', 'Creative project consultation'], color: '#6B7D6B', featured: false },
-  ]
-
-  const products = [
-    { Icon: Users,           iconColor: '#A06535', name: 'Collective Staff',       desc: 'Complete HR portal for small businesses', status: 'Live Now',      color: '#A06535', url: 'https://collectivestaff.app' },
-    { Icon: UtensilsCrossed, iconColor: '#4A7C59', name: 'Collective Dining',      desc: 'Restaurant management & shift scheduling', status: 'Coming Soon',  color: '#4A7C59', url: null },
-    { Icon: Users,           iconColor: '#6B7D6B', name: 'Collective Hospitality', desc: 'Hotel & guest management solutions',       status: 'Coming Soon',  color: '#6B7D6B', url: null },
-    { Icon: Truck,           iconColor: '#8A7A6A', name: 'Collective Fleet',       desc: 'Vehicle & transportation management',      status: 'In Development', color: '#8A7A6A', url: null },
-    { Icon: Timer,           iconColor: '#D9C3A3', name: 'Collective Time',        desc: 'Timekeeping for hourly workforces',        status: 'In Development', color: '#D9C3A3', url: null },
-  ]
-
-  const productOptions = ['Collective Staff', 'Collective Dining', 'Collective Hospitality', 'Collective Fleet', 'Collective Time', 'Creative Art Services', 'Not sure yet']
-  const employeeOptions = ['1-10', '11-25', '26-50', '51-100', '100-250', '250+']
 
   return (
     <div style={{ fontFamily: "'Montserrat', sans-serif", background: '#F7F2EB', minHeight: '100vh' }}>
@@ -66,24 +34,12 @@ export default function Home() {
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
-        .primary-btn { background: #A06535; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em; text-decoration: none; display: inline-block; }
+        .primary-btn { background: #A06535; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         .primary-btn:hover { background: #B8734A; transform: translateY(-1px); }
-        .outline-btn { background: transparent; color: #A06535; border: 1.5px solid #A06535; border-radius: 8px; padding: 11px 24px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em; text-decoration: none; display: inline-block; }
+        .outline-btn { background: transparent; color: #A06535; border: 1.5px solid #A06535; border-radius: 8px; padding: 11px 24px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         .outline-btn:hover { background: rgba(160,101,53,0.08); }
-        .service-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 16px; padding: 2.5rem; transition: all 0.25s; }
-        .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(43,43,43,0.08); }
-        .service-card.featured { border: 2px solid #A06535; }
-        .product-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 14px; padding: 1.5rem; transition: all 0.2s; position: relative; }
-        .product-card.clickable { cursor: pointer; }
-        .product-card.clickable:hover { border-color: #A06535; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(160,101,53,0.12); }
-        .divider { width: 48px; height: 2px; margin: 1rem 0; }
-        .check-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; color: #4A4A4A; }
-        .form-input { width: 100%; padding: 10px 14px; border: 1px solid rgba(217,195,163,0.2); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 13px; color: #fff; outline: none; background: rgba(255,255,255,0.06); transition: border-color 0.2s; }
-        .form-input:focus { border-color: #A06535; }
-        .form-input::placeholder { color: rgba(217,195,163,0.3); }
-        .product-chip { padding: 7px 14px; border: 1px solid rgba(217,195,163,0.2); border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; background: rgba(255,255,255,0.05); color: rgba(217,195,163,0.6); font-family: 'Montserrat', sans-serif; }
-        .product-chip.selected { background: rgba(160,101,53,0.2); border-color: #A06535; color: #A06535; font-weight: 600; }
-        .feature-item:hover { background: rgba(160,101,53,0.06) !important; }
+        .nav-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.2s; }
+        .nav-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(43,43,43,0.08); }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
         .float { animation: float 4s ease-in-out infinite; }
       `}</style>
@@ -119,11 +75,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Light floating features card */}
+        {/* Floating card */}
         <div className="reveal reveal-delay-2" style={{ position: 'relative' }}>
           <div className="float" style={{ background: '#fff', border: '1px solid #EDE6DA', borderRadius: 20, padding: '2rem', boxShadow: '0 16px 48px rgba(43,43,43,0.08)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: '1px solid #EDE6DA' }}>
-              <img src="/gcw-logo.png" alt="GCW" style={{ height: 36, objectFit: 'contain' }} />
+              <img src="/gcw-logo.png" alt="GCW" style={{ height: 40, objectFit: 'contain', background: 'transparent' }} />
               <div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 13, fontWeight: 600, color: '#2B2B2B', lineHeight: 1 }}>Gallagher Collective Works</div>
                 <div style={{ fontSize: 9, color: '#8A9E8A', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 2 }}>Built for Small Business Success</div>
@@ -131,11 +87,16 @@ export default function Home() {
             </div>
             <div style={{ fontSize: 10, fontWeight: 700, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.875rem' }}>Products Designed for Small Business</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
-              {features.map(({ Icon, color, label, desc }) => (
-                <div key={label} className="feature-item" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '8px 10px', borderRadius: 8, background: '#F7F2EB', transition: 'background 0.15s' }}>
-                  <div style={{ width: 28, height: 28, borderRadius: 6, background: color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Icon size={13} color={color} strokeWidth={1.75} />
-                  </div>
+              {[
+                { color: '#A06535', label: 'Clock In/Out',       desc: 'Live timer, job codes, time log' },
+                { color: '#6B7D6B', label: 'Digital Onboarding', desc: 'W-4, I-9, e-signatures' },
+                { color: '#A06535', label: 'Team Calendar',      desc: 'Full CRUD, 9 event types' },
+                { color: '#6B7D6B', label: 'IT Helpdesk',        desc: 'Tickets, change management' },
+                { color: '#A06535', label: 'Document Library',   desc: 'Upload, require signature' },
+                { color: '#6B7D6B', label: 'Role System',        desc: 'HR Admin, Supervisor, Staff' },
+              ].map(({ color, label, desc }) => (
+                <div key={label} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '8px 10px', borderRadius: 8, background: '#F7F2EB' }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0, marginTop: 4 }} />
                   <div>
                     <div style={{ fontSize: 11, fontWeight: 600, color: '#2B2B2B', lineHeight: 1.3 }}>{label}</div>
                     <div style={{ fontSize: 9, color: '#8A9E8A', marginTop: 1, lineHeight: 1.4 }}>{desc}</div>
@@ -165,155 +126,27 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Services */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 2rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>What we do</div>
-          <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#2B2B2B', marginBottom: '1rem' }}>Workforce Solutions & Creative Services. Under one roof.</h2>
-          <p className="reveal reveal-delay-2" style={{ fontSize: 14, color: '#6B7D6B', maxWidth: 520, margin: '0 auto', lineHeight: 1.8 }}>John and Tiffany Gallagher blend operational expertise with creative vision - helping businesses function beautifully and feel inspired.</p>
+      {/* Nav cards */}
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <h2 className="reveal" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B', marginBottom: '0.5rem' }}>Everything your business needs.</h2>
+          <p className="reveal reveal-delay-1" style={{ fontSize: 14, color: '#6B7D6B' }}>Explore each section to learn more.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
-          {services.map((s, i) => (
-            <div key={s.title} className={`service-card reveal reveal-delay-${i+1} ${s.featured ? 'featured' : ''}`}>
-              {s.featured && <div style={{ display: 'inline-block', background: 'rgba(160,101,53,0.1)', border: '1px solid rgba(160,101,53,0.3)', borderRadius: 20, padding: '3px 12px', fontSize: 10, fontWeight: 600, color: '#A06535', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Our Core Service</div>}
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: s.color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                <s.Icon size={24} color={s.color} strokeWidth={1.75} />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
+          {navCards.map((card, i) => (
+            <div key={card.title} className={`nav-card reveal reveal-delay-${i+1}`} onClick={() => navigate(card.path)}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = card.color; e.currentTarget.style.boxShadow = '0 8px 24px ' + card.color + '22'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = '#EDE6DA'; e.currentTarget.style.boxShadow = 'none'; }}>
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: card.color + '18', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
+                <card.Icon size={22} color={card.color} strokeWidth={1.75} />
               </div>
-              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', fontWeight: 600, color: '#2B2B2B', marginBottom: '0.5rem' }}>{s.title}</h3>
-              <div className="divider" style={{ background: s.color }} />
-              <p style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.8, marginBottom: '1.5rem' }}>{s.desc}</p>
-              {s.items.map(item => (
-                <div key={item} className="check-item">
-                  <div style={{ width: 18, height: 18, borderRadius: '50%', background: s.color + '22', border: '1px solid ' + s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke={s.color} strokeWidth="1.5" strokeLinecap="round"/></svg>
-                  </div>
-                  {item}
-                </div>
-              ))}
-              <div style={{ marginTop: '1.5rem' }}>
-                <button className="primary-btn" style={{ background: s.color, fontSize: 12, padding: '9px 20px' }} onClick={() => navigate('/contact')}>Get Started</button>
-              </div>
+              <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 600, color: '#2B2B2B', marginBottom: '0.4rem' }}>{card.title}</div>
+              <div style={{ fontSize: 12, color: '#6B7D6B', lineHeight: 1.6, marginBottom: '0.75rem' }}>{card.desc}</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: card.color }}>Learn more</div>
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Products */}
-      <section style={{ background: '#F0EBE3', padding: '5rem 2rem' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>The Collective Platform</div>
-            <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#2B2B2B', marginBottom: '1rem' }}>Software built for the businesses we serve.</h2>
-            <p className="reveal reveal-delay-2" style={{ fontSize: 14, color: '#6B7D6B', maxWidth: 520, margin: '0 auto', lineHeight: 1.8 }}>GCW builds purpose-built SaaS tools that give small businesses enterprise-grade systems at small business prices.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: '2rem' }}>
-            {products.map((p, i) => (
-              <div key={p.name} className={`product-card reveal reveal-delay-${i+1} ${p.url ? 'clickable' : ''}`} onClick={() => p.url && window.open(p.url, '_blank')}>
-                {p.status === 'Live Now' && <div style={{ position: 'absolute', top: 10, right: 10, background: '#A06535', color: '#fff', fontSize: 9, fontWeight: 600, padding: '2px 8px', borderRadius: 10 }}>LIVE</div>}
-                <div style={{ width: 40, height: 40, borderRadius: 10, background: p.iconColor + '18', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
-                  <p.Icon size={20} color={p.iconColor} strokeWidth={1.75} />
-                </div>
-                <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 15, fontWeight: 600, color: '#2B2B2B', marginBottom: '0.5rem' }}>{p.name}</div>
-                <div style={{ fontSize: 12, color: '#6B7D6B', lineHeight: 1.6, marginBottom: '1rem' }}>{p.desc}</div>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '2px 8px', borderRadius: 16, fontSize: 10, fontWeight: 600, background: p.color + '18', color: p.color }}>
-                  <div style={{ width: 5, height: 5, borderRadius: '50%', background: p.color }} />{p.status}
-                </div>
-                {p.url && <div style={{ marginTop: '0.75rem', fontSize: 11, color: '#A06535', fontWeight: 600 }}>Click to visit</div>}
-              </div>
-            ))}
-          </div>
-          <div className="reveal" style={{ background: '#fff', border: '1px solid #EDE6DA', borderRadius: 12, padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-            <div>
-              <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 600, color: '#2B2B2B', marginBottom: 4 }}>Try Collective Staff today - free demo available</div>
-              <div style={{ fontSize: 12, color: '#6B7D6B' }}>HR portal for small businesses - Starting at $59/mo - No setup fee</div>
-            </div>
-            <button className="primary-btn" onClick={() => window.open('https://collectivestaff.app', '_blank')}>Visit collectivestaff.app</button>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
-          <div>
-            <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>About GCW</div>
-            <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.2rem', fontWeight: 700, color: '#2B2B2B', lineHeight: 1.2, marginBottom: '1.25rem' }}>
-              John & Tiffany Gallagher.<br /><em style={{ color: '#A06535' }}>Built for small business.</em>
-            </h2>
-            <p className="reveal reveal-delay-2" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1rem' }}>
-              John and Tiffany Gallagher are a husband-and-wife team based in Ellsworth, Maine. John brings an extensive background in technology, IT management, and business strategy - translating complex systems into practical solutions and leading implementation with precision and care.
-            </p>
-            <p className="reveal reveal-delay-3" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1rem' }}>
-              Tiffany brings over two decades of operational management and human resources expertise - onboarding, compliance, payroll, training, SOP development, team management, and day-to-day operations across organizations of every size. If it touches people and process, Tiffany has not only done it - she has built the system around it.
-            </p>
-            <p className="reveal reveal-delay-3" style={{ fontSize: 13, color: '#6B7D6B', lineHeight: 1.9, marginBottom: '1.5rem' }}>
-              Together, John and Tiffany founded Gallagher Collective Works with a simple belief: small businesses deserve powerful tools without the enterprise price tag or complexity.
-              <strong style={{ color: '#A06535', display: 'block', marginTop: '0.75rem', fontSize: 14 }}>Gallagher Collective Works - Built to Work. Made for You.</strong>
-            </p>
-            <div className="reveal reveal-delay-4" style={{ display: 'flex', gap: 12 }}>
-              <button className="primary-btn" onClick={() => navigate('/contact')}>Get in Touch</button>
-              <button className="outline-btn" onClick={() => window.open('https://collectivestaff.app', '_blank')}>See Our Work</button>
-            </div>
-          </div>
-          <div className="reveal reveal-delay-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {[['Ellsworth, ME', 'Based in Maine'], ['20+', 'Years of Experience'], ['HR, Ops & IT', 'Combined Expertise'], ['5-50', 'Employee Sweet Spot']].map(([val, label]) => (
-              <div key={label} style={{ background: '#fff', border: '1px solid #EDE6DA', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
-                <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', color: '#A06535', fontWeight: 700, lineHeight: 1, marginBottom: 6 }}>{val}</div>
-                <div style={{ fontSize: 11, color: '#8A9E8A', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1.4 }}>{label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section style={{ background: '#3D3530', padding: '5rem 2rem' }}>
-        <div style={{ maxWidth: 800, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>Let us work together</div>
-            <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.4rem', fontWeight: 700, color: '#fff', marginBottom: '1rem' }}>Tell us about your business.</h2>
-            <p className="reveal reveal-delay-2" style={{ fontSize: 14, color: 'rgba(217,195,163,0.6)', lineHeight: 1.8 }}>Fill out the form below and we will be in touch within one business day.</p>
-          </div>
-          {submitted ? (
-            <div style={{ background: 'rgba(74,124,89,0.15)', border: '1px solid #4A7C59', borderRadius: 16, padding: '3rem', textAlign: 'center' }}>
-              <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', color: '#fff', marginBottom: '0.75rem' }}>We will be in touch!</div>
-              <div style={{ fontSize: 13, color: 'rgba(217,195,163,0.5)', lineHeight: 1.8 }}>Thank you for reaching out. John or Tiffany will respond within one business day.</div>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(217,195,163,0.1)', borderRadius: 16, padding: '2.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
-                {[['Full Name *','text',true,'Your full name','name'],['Company Name','text',false,'Your company','company'],['Email Address *','email',true,'your@email.com','email'],['Phone Number','text',false,'(207) 555-0000','phone']].map(([label,type,req,ph,field]) => (
-                  <div key={field}>
-                    <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 6 }}>{label}</label>
-                    <input className="form-input" type={type} required={req} placeholder={ph} value={formData[field]} onChange={e => setFormData(f => ({...f, [field]: e.target.value}))} />
-                  </div>
-                ))}
-              </div>
-              <div style={{ marginBottom: 16 }}>
-                <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 10 }}>Number of Employees</label>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                  {employeeOptions.map(opt => (
-                    <button key={opt} type="button" className={`product-chip ${formData.employees===opt?'selected':''}`} onClick={() => setFormData(f => ({...f, employees:opt}))}>{opt}</button>
-                  ))}
-                </div>
-              </div>
-              <div style={{ marginBottom: 16 }}>
-                <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 10 }}>What are you interested in?</label>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                  {productOptions.map(opt => (
-                    <button key={opt} type="button" className={`product-chip ${formData.products.includes(opt)?'selected':''}`} onClick={() => toggleProduct(opt)}>{opt}</button>
-                  ))}
-                </div>
-              </div>
-              <div style={{ marginBottom: 24 }}>
-                <label style={{ display: 'block', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(217,195,163,0.5)', fontWeight: 600, marginBottom: 6 }}>Tell us about your business</label>
-                <textarea className="form-input" rows={4} placeholder="What challenges are you facing? What does your team look like? What are you hoping to accomplish?" value={formData.message} onChange={e => setFormData(f => ({...f, message:e.target.value}))} style={{ resize: 'vertical' }} />
-              </div>
-              <button type="submit" className="primary-btn" style={{ width: '100%', fontSize: 14, padding: '14px' }}>Send Inquiry - We will Respond Within One Business Day</button>
-            </form>
-          )}
-        </div>
-      </section>
+      </div>
 
       <GCWFooter />
     </div>
