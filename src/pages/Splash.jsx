@@ -24,13 +24,13 @@ export default function Splash() {
         .reveal-delay-2 { transition-delay: 0.4s; }
         .reveal-delay-3 { transition-delay: 0.6s; }
         .reveal-delay-4 { transition-delay: 0.8s; }
-        .enter-btn { background: #B8734A; color: #fff; border: none; border-radius: 8px; padding: 14px 48px; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; letter-spacing: 0.12em; text-transform: uppercase; }
+        .enter-btn { background: #A06535; color: #fff; border: none; border-radius: 8px; padding: 14px 48px; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; letter-spacing: 0.12em; text-transform: uppercase; }
         .enter-btn:hover { background: #C9895F; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,115,74,0.3); }
         .corner-mark { position: absolute; width: 60px; height: 60px; opacity: 0.12; }
-        .corner-tl { top: 2rem; left: 2rem; border-top: 1.5px solid #B8734A; border-left: 1.5px solid #B8734A; }
-        .corner-tr { top: 2rem; right: 2rem; border-top: 1.5px solid #B8734A; border-right: 1.5px solid #B8734A; }
-        .corner-bl { bottom: 2rem; left: 2rem; border-bottom: 1.5px solid #B8734A; border-left: 1.5px solid #B8734A; }
-        .corner-br { bottom: 2rem; right: 2rem; border-bottom: 1.5px solid #B8734A; border-right: 1.5px solid #B8734A; }
+        .corner-tl { top: 2rem; left: 2rem; border-top: 1.5px solid #A06535; border-left: 1.5px solid #A06535; }
+        .corner-tr { top: 2rem; right: 2rem; border-top: 1.5px solid #A06535; border-right: 1.5px solid #A06535; }
+        .corner-bl { bottom: 2rem; left: 2rem; border-bottom: 1.5px solid #A06535; border-left: 1.5px solid #A06535; }
+        .corner-br { bottom: 2rem; right: 2rem; border-bottom: 1.5px solid #A06535; border-right: 1.5px solid #A06535; }
       `}</style>
 
       {/* Corner marks */}
@@ -49,13 +49,13 @@ export default function Splash() {
         <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.1rem', fontStyle: 'italic', color: '#6B7D6B', letterSpacing: '0.05em' }}>
           Your people deserve better systems.<br />Your brand deserves better design.
         </div>
-        <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.1rem', fontWeight: 600, color: '#B8734A', marginTop: 6, letterSpacing: '0.05em' }}>
+        <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.1rem', fontWeight: 600, color: '#A06535', marginTop: 6, letterSpacing: '0.05em' }}>
           We deliver both.
         </div>
       </div>
 
       {/* Divider */}
-      <div className="reveal reveal-delay-2" style={{ width: 48, height: 1.5, background: '#B8734A', marginBottom: '2rem', opacity: 0.5 }} />
+      <div className="reveal reveal-delay-2" style={{ width: 48, height: 1.5, background: '#A06535', marginBottom: '2rem', opacity: 0.5 }} />
 
       {/* Enter button */}
       <div className="reveal reveal-delay-3">

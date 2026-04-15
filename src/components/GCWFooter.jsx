@@ -12,12 +12,12 @@ export default function GCWFooter() {
         <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center' }}>
           {[['Services','/services'],['Platform','/platform'],['About','/about'],['Contact','/contact']].map(([label,path]) => (
             <button key={path} onClick={() => navigate(path)} style={{ fontSize: 12, color: 'rgba(217,195,163,0.4)', background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Montserrat',sans-serif", transition: 'color 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.color = '#B8734A'}
+              onMouseEnter={e => e.currentTarget.style.color = '#A06535'}
               onMouseLeave={e => e.currentTarget.style.color = 'rgba(217,195,163,0.4)'}>
               {label}
             </button>
           ))}
-          <button onClick={() => window.open('https://collectivestaff.app','_blank')} style={{ fontSize: 12, color: '#B8734A', background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Montserrat',sans-serif", fontWeight: 600 }}>collectivestaff.app</button>
+          <button onClick={() => window.open('https://collectivestaff.app','_blank')} style={{ fontSize: 12, color: '#A06535', background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Montserrat',sans-serif", fontWeight: 600 }}>collectivestaff.app</button>
         </div>
         <div style={{ fontSize: 11, color: 'rgba(217,195,163,0.25)' }}>2025 Gallagher Collective Works LLC</div>
       </div>
