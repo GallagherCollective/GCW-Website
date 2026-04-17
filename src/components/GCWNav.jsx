@@ -15,7 +15,7 @@ export default function GCWNav() {
     <nav style={{ background: '#fff', borderBottom: '1px solid #EDE6DA', padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 100, fontFamily: "'Montserrat', sans-serif" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap');`}</style>
       <div onClick={() => navigate('/home')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
-        <img src="/gcw-logo-transparent.png" alt="GCW" style={{ height: 44, objectFit: 'contain', mixBlendMode: 'multiply' }} />
+        <img src="/gcw-logo.png" alt="GCW" style={{ height: 44, objectFit: 'contain', mixBlendMode: 'multiply' }} />
         <div>
           <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontWeight: 700, color: '#2B2B2B', lineHeight: 1 }}>Gallagher Collective Works</div>
           <div style={{ fontSize: 10, color: '#8A9E8A', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Simplifying Work. Amplifying Results.</div>

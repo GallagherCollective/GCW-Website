@@ -97,7 +97,7 @@ export default function Platform() {
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '3rem 2rem' }}>
 
         {/* FEATURES TAB */}
-        {activeTab === 'features' && (
+        {activeTab === 'features' && (<div key='features-tab'>
           <div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: '2.5rem' }}>
               {features.map((f, i) => (
@@ -124,7 +124,7 @@ export default function Platform() {
         )}
 
         {/* PRICING TAB */}
-        {activeTab === 'pricing' && (
+        {activeTab === 'pricing' && (<div key='pricing-tab'>
           <div>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Simple Pricing</div>
