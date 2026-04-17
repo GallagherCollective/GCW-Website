@@ -40,23 +40,8 @@ export default function Splash() {
       <div class="corner-mark corner-br"></div>
 
       {/* Logo */}
-      <div className="reveal" style={{ marginBottom: '2.5rem', position: 'relative', display: 'inline-block' }}>
-        {/* Corner frame */}
-        <div style={{ position: 'absolute', top: -10, left: -10, width: 24, height: 24, borderTop: '2px solid #A06535', borderLeft: '2px solid #A06535', opacity: 0.7 }} />
-        <div style={{ position: 'absolute', top: -10, right: -10, width: 24, height: 24, borderTop: '2px solid #A06535', borderRight: '2px solid #A06535', opacity: 0.7 }} />
-        <div style={{ position: 'absolute', bottom: -10, left: -10, width: 24, height: 24, borderBottom: '2px solid #A06535', borderLeft: '2px solid #A06535', opacity: 0.7 }} />
-        <div style={{ position: 'absolute', bottom: -10, right: -10, width: 24, height: 24, borderBottom: '2px solid #A06535', borderRight: '2px solid #A06535', opacity: 0.7 }} />
-        <img src="/gcw-logo.png" alt="Gallagher Collective Works" style={{ width: 340, maxWidth: '80vw', objectFit: 'contain', borderRadius: 4 }} />
-      </div>
-
-      {/* Tagline */}
-      <div className="reveal reveal-delay-1" style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-        <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.1rem', fontStyle: 'italic', color: '#6B7D6B', letterSpacing: '0.05em' }}>
-          Your people deserve better systems.<br />Your brand deserves better design.
-        </div>
-        <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.1rem', fontWeight: 600, color: '#A06535', marginTop: 6, letterSpacing: '0.05em' }}>
-          We deliver both.
-        </div>
+      <div className="reveal" style={{ marginBottom: '2.5rem' }}>
+        <img src="/gcw-logo.png" alt="Gallagher Collective Works" style={{ width: 360, maxWidth: '85vw', objectFit: 'contain', borderRadius: 8, boxShadow: '0 4px 32px rgba(43,43,43,0.08)' }} />
       </div>
 
       {/* Divider */}
