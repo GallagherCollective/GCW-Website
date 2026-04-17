@@ -1,49 +1,57 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Users, UtensilsCrossed, Hotel, Truck, Timer, Headphones, Building, Clock } from 'lucide-react'
+import { Clock, FileText, Shield, BookOpen, ClipboardList, Calendar, MessageSquare, FolderOpen, BarChart2, AlertTriangle, Headphones, GitBranch, FileCheck, Users, Palette, Smartphone, Settings, Key, Zap, DollarSign, Building, Timer } from 'lucide-react'
 import GCWNav from '../components/GCWNav'
 import GCWFooter from '../components/GCWFooter'
 
 export default function Platform() {
   const navigate = useNavigate()
+  const [activeTab, setActiveTab] = useState('features')
+
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: 0.1 })
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
+      { threshold: 0.1 }
+    )
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
 
-  const products = [
-    { Icon: Users, iconColor: '#A06535', name: 'Collective Staff', status: 'Live Now', color: '#A06535', url: 'https://collectivestaff.app',
-      desc: 'Complete HR portal for small businesses.',
-      features: ['Digital onboarding & e-signatures', 'Timesheets, time off & approvals', 'IT Helpdesk & change management', 'Performance tracking & memos', 'Visitor kiosk & document library'] },
-    { Icon: UtensilsCrossed, iconColor: '#4A7C59', name: 'Collective Dining', status: 'Coming Soon', color: '#4A7C59', url: null,
-      desc: 'Restaurant & food service management.',
-      features: ['Shift scheduling & tip tracking', 'Inventory & food safety logs', 'Revenue vs labor reporting', 'Role-based scheduling (server/cook)', 'Kitchen & front of house tools'] },
-    { Icon: Hotel, iconColor: '#6B7D6B', name: 'Collective Hospitality', status: 'Coming Soon', color: '#6B7D6B', url: null,
-      desc: 'Hotel & lodging management platform.',
-      features: ['Guest management & check-in/out', 'Housekeeping schedule & assignments', 'Room maintenance request tracking', 'Front desk tools & reservations', 'Staff communication & shift coverage'] },
-    { Icon: Truck, iconColor: '#8A7A6A', name: 'Collective Fleet', status: 'In Development', color: '#8A7A6A', url: null,
-      desc: 'Vehicle & transportation management.',
-      features: ['Vehicle assignments & inspections', 'Maintenance scheduling & logs', 'DOT compliance tracking', 'Driver logs & route management', 'Fleet cost & mileage reporting'] },
-    { Icon: Timer, iconColor: '#D9C3A3', name: 'Collective Time', status: 'In Development', color: '#D9C3A3', url: null,
-      desc: 'Timekeeping for retail & hourly workers.',
-      features: ['GPS clock-in/out & geofencing', 'Shift scheduling & availability', 'Payroll export to QuickBooks/Gusto', 'Overtime alerts & labor reporting', 'Mobile-first employee experience'] },
+  const features = [
+    { Icon: FileText,     color: '#A06535', title: 'Digital Employee Onboarding', desc: 'Guide new hires through W-4, I-9, Direct Deposit, Handbook e-sign, and policy acknowledgments — all before their first day.', tags: ['e-signatures','onboarding flow','progress tracking'] },
+    { Icon: Clock,        color: '#6B7D6B', title: 'Clock In / Clock Out',         desc: 'Live timer with job codes, department tracking, and daily time log. Managers see who is clocked in in real time.',              tags: ['live status','job codes','time log'] },
+    { Icon: Shield,       color: '#A06535', title: 'Policy Sign-Offs',             desc: 'Employees sign policies digitally. Admins track who has and has not signed, and send reminders with one click.',                  tags: ['e-signatures','track unsigned','compliance'] },
+    { Icon: BookOpen,     color: '#6B7D6B', title: 'Employee Handbook',            desc: 'Store your full employee handbook in one place. Employees access it anytime. Update it once — everyone sees it instantly.',       tags: ['always current','onboarding','easy access'] },
+    { Icon: ClipboardList,color: '#A06535', title: 'Timesheet Submission',         desc: 'Employees submit weekly timesheets from any device. Managers approve or send back with one click. Full OT visibility.',           tags: ['weekly submit','approve/deny','export ready'] },
+    { Icon: Calendar,     color: '#6B7D6B', title: 'Time Off Requests',            desc: 'Employees request PTO, sick, or personal time. Managers see full balances, approve with one click, and track history.',           tags: ['PTO tracking','balance alerts','approval flow'] },
+    { Icon: MessageSquare,color: '#A06535', title: 'Memos & Messaging',            desc: 'Send company-wide or targeted memos with read receipts. Urgent memos display as a full-screen banner on every dashboard.',        tags: ['read receipts','urgent banners','announcements'] },
+    { Icon: FolderOpen,   color: '#6B7D6B', title: 'Document Library',            desc: 'Upload SOPs, forms, and handbooks. Require signatures. Add to onboarding. Track who has signed what — all in one place.',         tags: ['require signature','onboarding flow','audit trail'] },
+    { Icon: BarChart2,    color: '#A06535', title: 'Performance Tracking',         desc: 'Log reviews, ratings, and notes per employee. Flag warnings or add recognition. Full history searchable and exportable.',         tags: ['reviews','warnings log','recognition'] },
+    { Icon: Headphones,   color: '#6B7D6B', title: 'Collective Services Helpdesk', desc: 'Full IT and Facilities ticket queues with 5-status workflow, priority levels, escalation to change requests, and work logs.',     tags: ['IT queue','facilities queue','change requests'] },
+    { Icon: GitBranch,    color: '#A06535', title: 'IT Change Management',         desc: 'Kanban-based change request workflow with approval stages, rollback plans, linked tickets, and daily IT work logs.',              tags: ['kanban board','rollback plans','work logs'] },
+    { Icon: FileCheck,    color: '#6B7D6B', title: 'IT Daily Work Log',            desc: 'IT staff log daily activity, linked to tickets and change requests. Managers see full workload visibility across the team.',       tags: ['daily logging','ticket links','manager view'] },
+    { Icon: Calendar,     color: '#A06535', title: 'Team & Employee Calendars',    desc: '9 event types, full CRUD, month/week/list views. Employees see company events, PTO approvals, birthdays, and deadlines.',          tags: ['9 event types','company-wide','personal reminders'] },
+    { Icon: Palette,      color: '#6B7D6B', title: 'Custom Branding',              desc: 'Upload your logo, set your colors, and configure your sidebar. The portal looks and feels like your company — not a generic tool.', tags: ['logo upload','brand colors','live preview'] },
+    { Icon: Smartphone,   color: '#A06535', title: 'Mobile Responsive',            desc: 'Bottom navigation bar on mobile. All pages optimized for phones. Employees can clock in, request time off, and read memos on the go.', tags: ['bottom nav','phone optimized','fully functional'] },
+    { Icon: Settings,     color: '#6B7D6B', title: 'Client Config Panel',          desc: 'Admins configure documents, feature flags, branding, and onboarding flow without any developer involvement.',                    tags: ['no-code config','feature flags','instant preview'] },
+    { Icon: Users,        color: '#A06535', title: 'Employee Roster & Profiles',   desc: 'Full employee directory with search, department filter, performance score, hire date, and full profile with edit modal.',          tags: ['directory search','full profiles','attendance %'] },
+    { Icon: Key,          color: '#6B7D6B', title: 'Dev Request Portal',           desc: 'Submit feature requests directly to GCW. Track status, priority, and estimated delivery. Your portal evolves with your needs.',   tags: ['direct to GCW','track status','custom builds'] },
   ]
 
   const plans = [
-    { name: 'Starter', price: 59, limit: 'Up to 15 employees', color: '#6B7D6B', features: ['All core HR modules', 'Digital onboarding', 'Policy sign-offs', 'Timesheets & time off', 'Employee handbook', 'Memos & messaging', 'Document library', 'Email support'] },
-    { name: 'Professional', price: 129, limit: 'Up to 50 employees', color: '#A06535', popular: true, features: ['Everything in Starter', 'Performance tracking', 'Team calendar', 'Visitor kiosk', 'Role management', 'Priority support', 'Client config panel', 'Custom branding'] },
-    { name: 'Growth', price: 179, limit: 'Up to 100 employees', color: '#4A7C59', features: ['Everything in Professional', 'IT change management', 'Daily work logs', 'Dev request portal', 'Advanced reporting', 'Dedicated onboarding', 'SLA support'] },
-    { name: 'Enterprise', price: 299, limit: '100-150 employees', color: '#3D3530', features: ['Everything in Growth', 'Custom feature requests', 'White-label options', 'API access', 'Custom integrations', 'Account manager'] },
+    { name: 'Starter',      price: 59,  limit: 'Up to 15 employees', color: '#6B7D6B', features: ['All core HR modules','Digital onboarding','Policy sign-offs','Timesheets & time off','Employee handbook','Memos & messaging','Document library','Email support'] },
+    { name: 'Professional', price: 129, limit: 'Up to 50 employees',  color: '#A06535', popular: true, features: ['Everything in Starter','Performance tracking','Team calendar','Visitor kiosk','Role management','Priority support','Client config panel','Custom branding'] },
+    { name: 'Growth',       price: 179, limit: 'Up to 100 employees', color: '#4A7C59', features: ['Everything in Professional','IT change management','Daily work logs','Dev request portal','Advanced reporting','Dedicated onboarding','SLA support'] },
+    { name: 'Enterprise',   price: 299, limit: '100-150 employees',   color: '#3D3530', features: ['Everything in Growth','Custom feature requests','White-label options','API access','Custom integrations','Account manager'] },
   ]
 
   const addons = [
     { Icon: Headphones, color: '#A06535', name: 'Collective Services', price: '+$29/mo', desc: 'IT & Facilities helpdesk, change management, and work logs.', premium: true },
-    { Icon: Building,   color: '#6B7D6B', name: 'Collective Campus',   price: '+$29/mo', desc: 'Room and space scheduling for shared workspaces.', premium: true },
-    { Icon: Clock,      color: '#8A7A6A', name: 'Collective Time',     price: '+$19/mo', desc: 'GPS clock-in, shift scheduling, and payroll export.', premium: false },
-    { Icon: Users,      color: '#4A7C59', name: 'Payroll Export',      price: '+$19/mo', desc: 'Export hours & earnings to QuickBooks, Gusto, or CSV.', premium: false },
-    { Icon: Timer,      color: '#6B7D6B', name: 'e-Signature Pro',     price: '+$19/mo', desc: 'Legally binding signatures with timestamp & audit trail.', premium: false },
-    { Icon: Building,   color: '#A06535', name: 'HR Document Pack',    price: '+$29/mo', desc: '10 pre-built HR templates — handbook, PTO policy & more.', premium: true },
+    { Icon: Building,   color: '#6B7D6B', name: 'Collective Campus',   price: '+$29/mo', desc: 'Room and space scheduling for shared workspaces.',           premium: true },
+    { Icon: Timer,      color: '#8A7A6A', name: 'Collective Time',     price: '+$19/mo', desc: 'GPS clock-in, shift scheduling, and payroll export.',         premium: false },
+    { Icon: Users,      color: '#4A7C59', name: 'Payroll Export',      price: '+$19/mo', desc: 'Export hours & earnings to QuickBooks, Gusto, or CSV.',       premium: false },
+    { Icon: FileText,   color: '#6B7D6B', name: 'e-Signature Pro',     price: '+$19/mo', desc: 'Legally binding signatures with timestamp & audit trail.',    premium: false },
+    { Icon: FolderOpen, color: '#A06535', name: 'HR Document Pack',    price: '+$29/mo', desc: '10 pre-built HR templates — handbook, PTO policy & more.',    premium: true },
     { Icon: Users,      color: '#3D3530', name: 'GCW Managed Setup',   price: '$249 once', desc: 'White-glove setup: GCW configures everything for your team.', premium: false },
   ]
 
@@ -58,116 +66,128 @@ export default function Platform() {
         .primary-btn { background: #A06535; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         .primary-btn:hover { background: #B8734A; transform: translateY(-1px); }
         .outline-btn { background: transparent; color: #A06535; border: 1.5px solid #A06535; border-radius: 8px; padding: 11px 24px; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .tab-btn { padding: 10px 28px; border: none; border-radius: 8px; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .tab-active { background: #A06535; color: #fff; }
+        .tab-inactive { background: transparent; color: rgba(43,43,43,0.5); }
+        .tab-inactive:hover { color: #A06535; }
+        .feature-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 12px; padding: 1.25rem; transition: all 0.2s; }
+        .feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(43,43,43,0.08); }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 500; background: #F7F2EB; color: #6B7D6B; margin: 2px; }
         .plan-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 16px; padding: 2rem; transition: all 0.25s; }
         .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(43,43,43,0.08); }
-        .check-sm { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: 11px; color: #6B7D6B; }
+        .check-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 12px; color: #4A4A4A; }
       `}</style>
+
       <GCWNav />
 
-      <div style={{ background: '#3D3530', padding: '4rem 2rem', textAlign: 'center' }}>
+      {/* Header */}
+      <div style={{ background: '#3D3530', padding: '3.5rem 2rem', textAlign: 'center' }}>
         <div style={{ maxWidth: 680, margin: '0 auto' }}>
-          <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>The GCW Platform</div>
-          <h1 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '3rem', fontWeight: 700, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>Software built for the businesses we serve.</h1>
-          <p className="reveal reveal-delay-2" style={{ fontSize: 15, color: 'rgba(217,195,163,0.6)', lineHeight: 1.8 }}>Purpose-built SaaS tools that give small businesses enterprise-grade systems at small business prices.</p>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>Collective Staff</div>
+          <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.8rem', fontWeight: 700, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>18 features. One portal.</h1>
+          <p style={{ fontSize: 14, color: 'rgba(217,195,163,0.55)', lineHeight: 1.8, marginBottom: '2rem' }}>Everything included — no modules to unlock, no features to pay for.</p>
+          {/* Tabs */}
+          <div style={{ display: 'inline-flex', gap: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 10, padding: 4 }}>
+            <button className={`tab-btn ${activeTab==='features' ? 'tab-active' : 'tab-inactive'}`} onClick={() => setActiveTab('features')}>Features</button>
+            <button className={`tab-btn ${activeTab==='pricing' ? 'tab-active' : 'tab-inactive'}`} style={{ color: activeTab==='pricing' ? '#fff' : 'rgba(217,195,163,0.5)' }} onClick={() => setActiveTab('pricing')}>Pricing</button>
+          </div>
         </div>
       </div>
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 2rem' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '3rem 2rem' }}>
 
-        {/* Products with features */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>The Collective Suite</div>
-          <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B' }}>One platform. Every business need.</h2>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: '4rem' }}>
-          {products.map((p, i) => (
-            <div key={p.name} onClick={() => p.url && window.open(p.url,'_blank')}
-              className={`reveal reveal-delay-${(i%3)+1}`}
-              style={{ background: '#fff', border: p.url ? '2px solid #A06535' : '1px solid #EDE6DA', borderRadius: 14, padding: '1.5rem', cursor: p.url ? 'pointer' : 'default', position: 'relative', transition: 'all 0.25s' }}
-              onMouseEnter={e => { if(p.url) { e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 8px 24px rgba(160,101,53,0.12)'; }}}
-              onMouseLeave={e => { e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='none'; }}>
-              {p.status === 'Live Now' && <div style={{ position: 'absolute', top: 10, right: 10, background: '#A06535', color: '#fff', fontSize: 9, fontWeight: 600, padding: '2px 8px', borderRadius: 10 }}>LIVE</div>}
-              <div style={{ width: 44, height: 44, borderRadius: 10, background: p.iconColor + '18', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
-                <p.Icon size={22} color={p.iconColor} strokeWidth={1.75} />
-              </div>
-              <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 600, color: '#2B2B2B', marginBottom: 4 }}>{p.name}</div>
-              <div style={{ fontSize: 12, color: '#6B7D6B', marginBottom: '0.75rem' }}>{p.desc}</div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '2px 8px', borderRadius: 16, fontSize: 10, fontWeight: 600, background: p.color + '18', color: p.color, marginBottom: '0.75rem' }}>
-                <div style={{ width: 5, height: 5, borderRadius: '50%', background: p.color }} />{p.status}
-              </div>
-              <div style={{ borderTop: '1px solid #EDE6DA', paddingTop: '0.75rem', marginTop: '0.5rem' }}>
-                {p.features.map(f => (
-                  <div key={f} className="check-sm">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink:0, marginTop:1 }}><circle cx="6" cy="6" r="5" fill={p.color+'22'}/><path d="M3 6l2 2 4-4" stroke={p.color} strokeWidth="1.5" strokeLinecap="round"/></svg>
-                    {f}
+        {/* FEATURES TAB */}
+        {activeTab === 'features' && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: '2.5rem' }}>
+              {features.map((f, i) => (
+                <div key={f.title} className="feature-card reveal">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '0.75rem' }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 8, background: f.color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <f.Icon size={18} color={f.color} strokeWidth={1.75} />
+                    </div>
+                    <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 14, fontWeight: 600, color: '#2B2B2B', lineHeight: 1.3 }}>{f.title}</div>
                   </div>
-                ))}
-              </div>
-              {p.url && <div style={{ marginTop: '0.75rem', fontSize: 11, color: '#A06535', fontWeight: 600 }}>Click to visit</div>}
-            </div>
-          ))}
-        </div>
-
-        {/* Pricing */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div className="reveal" style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Collective Staff Pricing</div>
-          <h2 className="reveal reveal-delay-1" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B', marginBottom: 8 }}>Simple, transparent pricing.</h2>
-          <p className="reveal reveal-delay-2" style={{ fontSize: 13, color: '#6B7D6B' }}>No setup fees. No contracts. Cancel anytime.</p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: '2rem' }}>
-          {plans.map(plan => (
-            <div key={plan.name} className="plan-card reveal reveal-delay-1" style={{ borderTop: '3px solid ' + plan.color, position: 'relative' }}>
-              {plan.popular && <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: '#A06535', color: '#fff', fontSize: 9, fontWeight: 700, padding: '3px 12px', borderRadius: 20, whiteSpace: 'nowrap' }}>MOST POPULAR</div>}
-              <div style={{ fontSize: 13, fontWeight: 700, color: plan.color, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{plan.name}</div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginBottom: 4 }}>
-                <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B' }}>${plan.price}</span>
-                <span style={{ fontSize: 12, color: '#8A9E8A' }}>/mo</span>
-              </div>
-              <div style={{ fontSize: 11, color: '#8A9E8A', marginBottom: '1.25rem', paddingBottom: '1.25rem', borderBottom: '1px solid #EDE6DA' }}>{plan.limit}</div>
-              {plan.features.map(f => (
-                <div key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 8, fontSize: 12, color: '#4A4A4A' }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, marginTop: 1 }}><circle cx="7" cy="7" r="6" fill={plan.color + '22'}/><path d="M4 7l2 2 4-4" stroke={plan.color} strokeWidth="1.5" strokeLinecap="round"/></svg>
-                  {f}
+                  <p style={{ fontSize: 11, color: '#6B7D6B', lineHeight: 1.6, marginBottom: '0.75rem' }}>{f.desc}</p>
+                  <div>{f.tags.map(t => <span key={t} className="tag">{t}</span>)}</div>
                 </div>
               ))}
-              <button className="primary-btn" style={{ background: plan.color, width: '100%', marginTop: '1.25rem', fontSize: 12 }} onClick={() => window.open('https://collectivestaff.app/demo','_blank')}>Try Demo</button>
             </div>
-          ))}
-        </div>
-
-        {/* Add-ons */}
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Premium Add-Ons</div>
-          <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: '#2B2B2B', marginBottom: 8 }}>Enhance your plan</h2>
-          <p style={{ fontSize: 13, color: '#6B7D6B' }}>Enhance any plan with these optional features</p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: '3rem' }}>
-          {addons.map(addon => (
-            <div key={addon.name} style={{ background: addon.premium ? '#3D3530' : '#fff', border: addon.premium ? '1px solid #A06535' : '1px solid #EDE6DA', borderRadius: 12, padding: '1.25rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: addon.premium ? '#D9C3A3' : '#2B2B2B' }}>{addon.name}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: '#A06535' }}>{addon.price}</div>
-                  {addon.premium && <span style={{ fontSize: 9, padding: '1px 6px', borderRadius: 8, background: 'rgba(160,101,53,0.2)', color: '#A06535', fontWeight: 700 }}>PREMIUM</span>}
-                </div>
+            <div style={{ background: '#3D3530', borderRadius: 12, padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Need something specific?</div>
+                <div style={{ fontSize: 12, color: 'rgba(217,195,163,0.5)' }}>Every plan includes the Dev Request Portal — submit feature requests directly to the GCW team.</div>
               </div>
-              <div style={{ fontSize: 11, color: addon.premium ? 'rgba(217,195,163,0.6)' : '#6B7D6B', lineHeight: 1.5 }}>{addon.desc}</div>
+              <button className="primary-btn" onClick={() => window.open('https://collectivestaff.app/demo','_blank')}>Try the Demo</button>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
 
-        <div style={{ background: '#3D3530', borderRadius: 16, padding: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+        {/* PRICING TAB */}
+        {activeTab === 'pricing' && (
           <div>
-            <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: 6 }}>Ready to get started?</div>
-            <div style={{ fontSize: 13, color: 'rgba(217,195,163,0.5)' }}>Try the live demo or schedule a personalized walkthrough with Tiffany.</div>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Simple Pricing</div>
+              <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B', marginBottom: 8 }}>No surprises. No hidden fees.</h2>
+              <p style={{ fontSize: 13, color: '#6B7D6B' }}>Month-to-month. Cancel anytime. All plans include a free setup call with the GCW team.</p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: '2.5rem' }}>
+              {plans.map(plan => (
+                <div key={plan.name} className="plan-card" style={{ borderTop: '3px solid ' + plan.color, position: 'relative' }}>
+                  {plan.popular && <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: '#A06535', color: '#fff', fontSize: 9, fontWeight: 700, padding: '3px 12px', borderRadius: 20, whiteSpace: 'nowrap' }}>MOST POPULAR</div>}
+                  <div style={{ fontSize: 12, fontWeight: 700, color: plan.color, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{plan.name}</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginBottom: 4 }}>
+                    <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B' }}>${plan.price}</span>
+                    <span style={{ fontSize: 12, color: '#8A9E8A' }}>/mo</span>
+                  </div>
+                  <div style={{ fontSize: 11, color: '#8A9E8A', marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: '1px solid #EDE6DA' }}>{plan.limit}</div>
+                  {plan.features.map(f => (
+                    <div key={f} className="check-item">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink:0, marginTop:1 }}><circle cx="7" cy="7" r="6" fill={plan.color+'22'}/><path d="M4 7l2 2 4-4" stroke={plan.color} strokeWidth="1.5" strokeLinecap="round"/></svg>
+                      {f}
+                    </div>
+                  ))}
+                  <button className="primary-btn" style={{ background: plan.color, width: '100%', marginTop: '1.25rem', fontSize: 12 }} onClick={() => window.open('https://collectivestaff.app/demo','_blank')}>Get Started</button>
+                </div>
+              ))}
+            </div>
+
+            {/* Add-ons */}
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Premium Add-Ons</div>
+              <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: '#2B2B2B', marginBottom: 8 }}>Enhance your plan</h2>
+              <p style={{ fontSize: 13, color: '#6B7D6B' }}>Enhance any plan with these optional features</p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: '2.5rem' }}>
+              {addons.map(addon => (
+                <div key={addon.name} style={{ background: addon.premium ? '#3D3530' : '#fff', border: addon.premium ? '1px solid rgba(160,101,53,0.3)' : '1px solid #EDE6DA', borderRadius: 12, padding: '1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: addon.premium ? '#D9C3A3' : '#2B2B2B' }}>{addon.name}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: '#A06535' }}>{addon.price}</div>
+                      {addon.premium && <span style={{ fontSize: 9, padding: '1px 6px', borderRadius: 8, background: 'rgba(160,101,53,0.2)', color: '#A06535', fontWeight: 700 }}>PREMIUM</span>}
+                    </div>
+                  </div>
+                  <div style={{ fontSize: 11, color: addon.premium ? 'rgba(217,195,163,0.6)' : '#6B7D6B', lineHeight: 1.5 }}>{addon.desc}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ background: '#3D3530', borderRadius: 16, padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: 4 }}>Ready to get started?</div>
+                <div style={{ fontSize: 12, color: 'rgba(217,195,163,0.5)' }}>Try the live demo or schedule a personalized walkthrough with Tiffany.</div>
+              </div>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <button className="primary-btn" onClick={() => window.open('https://collectivestaff.app/demo','_blank')}>Try Free Demo</button>
+                <button className="outline-btn" onClick={() => navigate('/contact')}>Talk to Us</button>
+              </div>
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <button className="primary-btn" onClick={() => window.open('https://collectivestaff.app/demo','_blank')}>Try Free Demo</button>
-            <button className="outline-btn" onClick={() => navigate('/contact')}>Talk to Us</button>
-          </div>
-        </div>
+        )}
       </div>
+
       <GCWFooter />
     </div>
   )
