@@ -80,8 +80,8 @@ export default function Platform() {
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '3rem 2rem' }}>
 
         {/* FEATURES TAB */}
-        {activeTab === 'features' && (<div key='features-tab'>
-          <div>
+        {activeTab === 'features' && (
+          <div key='ft'>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: '2.5rem' }}>
               {features.map((f, i) => (
                 <div key={f.title} className="feature-card reveal">
@@ -107,8 +107,8 @@ export default function Platform() {
         )}
 
         {/* PRICING TAB */}
-        {activeTab === 'pricing' && (<div key='pricing-tab'>
-          <div>
+        {activeTab === 'pricing' && (
+          <div key='pt'>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Simple Pricing</div>
               <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B', marginBottom: 8 }}>No surprises. No hidden fees.</h2>
