@@ -1,41 +1,49 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Clock, FileText, Shield, BookOpen, ClipboardList, Calendar, MessageSquare, FolderOpen, BarChart2, AlertTriangle, Headphones, GitBranch, FileCheck, Users, Palette, Smartphone, Settings, Key, Zap, DollarSign, Building, Timer } from 'lucide-react'
+import { Clock, FileText, Shield, BookOpen, ClipboardList, Calendar, MessageSquare, FolderOpen, BarChart2, Headphones, GitBranch, FileCheck, Users, Palette, Smartphone, Settings, Key, Building, Timer } from 'lucide-react'
 import GCWNav from '../components/GCWNav'
 import GCWFooter from '../components/GCWFooter'
 
 export default function Platform() {
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState('features')
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    const addons = [
-    { Icon: Headphones, color: '#A06535', name: 'Collective Services', price: '+$29/mo', desc: 'IT & Facilities helpdesk, change management, and work logs.', premium: true },
-    { Icon: Building,   color: '#6B7D6B', name: 'Collective Campus',   price: '+$29/mo', desc: 'Room and space scheduling for shared workspaces.',           premium: true },
-    { Icon: FolderOpen, color: '#A06535', name: 'HR Document Pack',    price: '+$29/mo', desc: '10 pre-built HR templates - handbook, PTO policy & more.',   premium: true },
-    { Icon: Timer,      color: '#8A7A6A', name: 'Collective Time',     price: '+$19/mo', desc: 'GPS clock-in, shift scheduling, and payroll export.',        premium: false },
-    { Icon: Users,      color: '#4A7C59', name: 'Payroll Export',      price: '+$19/mo', desc: 'Export hours & earnings to QuickBooks, Gusto, or CSV.',      premium: false },
-    { Icon: FileText,   color: '#6B7D6B', name: 'e-Signature Pro',     price: '+$19/mo', desc: 'Legally binding signatures with timestamp & audit trail.',   premium: false },
-    { Icon: Users,      color: '#3D3530', name: 'GCW Managed Setup',   price: '$249 once', desc: 'White-glove setup: GCW configures everything for your team.', premium: false },
-  ]
-
-  return () => observer.disconnect()
-  }, [])
+  const [tab, setTab] = useState('features')
 
   const features = [
-    { Icon: FileText,     color: '#A06535', title: 'Digital Employee Onboarding', desc: 'Guide new hires through W-4, I-9, Direct Deposit, Handbook e-sign, and policy acknowledgments — all before their first day.', tags: ['e-signatures','onboarding flow','progress tracking'] },
-    { Icon: Clock,        color: '#6B7D6B', title: 'Clock In / Clock Out',         desc: 'Live timer with job codes, department tracking, and daily time log. Managers see who is clocked in in real time.',              tags: ['live status','job codes','time log'] },
-    { Icon: Shield,       color: '#A06535', title: 'Policy Sign-Offs',             desc: 'Employees sign policies digitally. Admins track who has and has not signed, and send reminders with one click.',                  tags: ['e-signatures','track unsigned','compliance'] },
-    { Icon: BookOpen,     color: '#6B7D6B', title: 'Employee Handbook',            desc: 'Store your full employee handbook in one place. Employees access it anytime. Update it once — everyone sees it instantly.',       tags: ['always current','onboarding','easy access'] },
-    { Icon: ClipboardList,color: '#A06535', title: 'Timesheet Submission',         desc: 'Employees submit weekly timesheets from any device. Managers approve or send back with one click. Full OT visibility.',           tags: ['weekly submit','approve/deny','export ready'] },
-    { Icon: Calendar,     color: '#6B7D6B', title: 'Time Off Requests',            desc: 'Employees request PTO, sick, or personal time. Managers see full balances, approve with one click, and track history.',           tags: ['PTO tracking','balance alerts','approval flow'] },
-    { Icon: MessageSquare,color: '#A06535', title: 'Memos & Messaging',            desc: 'Send company-wide or targeted memos with read receipts. Urgent memos display as a full-screen banner on every dashboard.',        tags: ['read receipts','urgent banners','announcements'] },
-    { Icon: Users,      color: '#3D3530', name: 'GCW Managed Setup',   price: '$249 once', desc: 'White-glove setup: GCW configures everything for your team.', premium: false },
+    { Icon: FileText,     color: '#A06535', title: 'Digital Employee Onboarding', desc: 'Guide new hires through W-4, I-9, Direct Deposit, Handbook e-sign, and policy acknowledgments - all before their first day.', tags: ['e-signatures','onboarding flow','progress tracking'] },
+    { Icon: Clock,        color: '#6B7D6B', title: 'Clock In / Clock Out',        desc: 'Live timer with job codes, department tracking, and daily time log. Managers see who is clocked in in real time.', tags: ['live status','job codes','time log'] },
+    { Icon: Shield,       color: '#A06535', title: 'Policy Sign-Offs',            desc: 'Employees sign policies digitally. Admins track who has and has not signed, and send reminders with one click.', tags: ['e-signatures','track unsigned','compliance'] },
+    { Icon: BookOpen,     color: '#6B7D6B', title: 'Employee Handbook',           desc: 'Store your full employee handbook in one place. Employees access it anytime. Update it once - everyone sees it instantly.', tags: ['always current','onboarding','easy access'] },
+    { Icon: ClipboardList,color: '#A06535', title: 'Timesheet Submission',        desc: 'Employees submit weekly timesheets from any device. Managers approve or send back with one click. Full OT visibility.', tags: ['weekly submit','approve/deny','export ready'] },
+    { Icon: Calendar,     color: '#6B7D6B', title: 'Time Off Requests',           desc: 'Employees request PTO, sick, or personal time. Managers see full balances, approve with one click, and track history.', tags: ['PTO tracking','balance alerts','approval flow'] },
+    { Icon: MessageSquare,color: '#A06535', title: 'Memos & Messaging',           desc: 'Send company-wide or targeted memos with read receipts. Urgent memos display as a full-screen banner on every dashboard.', tags: ['read receipts','urgent banners','announcements'] },
+    { Icon: FolderOpen,   color: '#6B7D6B', title: 'Document Library',           desc: 'Upload SOPs, forms, and handbooks. Require signatures. Add to onboarding. Track who has signed what - all in one place.', tags: ['require signature','onboarding flow','audit trail'] },
+    { Icon: BarChart2,    color: '#A06535', title: 'Performance Tracking',        desc: 'Log reviews, ratings, and notes per employee. Flag warnings or add recognition. Full history searchable and exportable.', tags: ['reviews','warnings log','recognition'] },
+    { Icon: Headphones,   color: '#6B7D6B', title: 'Collective Services Helpdesk',desc: 'Full IT and Facilities ticket queues with 5-status workflow, priority levels, escalation to change requests, and work logs.', tags: ['IT queue','facilities queue','change requests'] },
+    { Icon: GitBranch,    color: '#A06535', title: 'IT Change Management',        desc: 'Kanban-based change request workflow with approval stages, rollback plans, linked tickets, and daily IT work logs.', tags: ['kanban board','rollback plans','work logs'] },
+    { Icon: FileCheck,    color: '#6B7D6B', title: 'IT Daily Work Log',           desc: 'IT staff log daily activity, linked to tickets and change requests. Managers see full workload visibility across the team.', tags: ['daily logging','ticket links','manager view'] },
+    { Icon: Calendar,     color: '#A06535', title: 'Team & Employee Calendars',   desc: '9 event types, full CRUD, month/week/list views. Employees see company events, PTO approvals, birthdays, and deadlines.', tags: ['9 event types','company-wide','personal reminders'] },
+    { Icon: Palette,      color: '#6B7D6B', title: 'Custom Branding',             desc: 'Upload your logo, set your colors, and configure your sidebar. The portal looks and feels like your company - not generic.', tags: ['logo upload','brand colors','live preview'] },
+    { Icon: Smartphone,   color: '#A06535', title: 'Mobile Responsive',           desc: 'Bottom navigation bar on mobile. All pages optimized for phones. Employees can clock in, request time off, and read memos on the go.', tags: ['bottom nav','phone optimized','fully functional'] },
+    { Icon: Settings,     color: '#6B7D6B', title: 'Client Config Panel',         desc: 'Admins configure documents, feature flags, branding, and onboarding flow without any developer involvement.', tags: ['no-code config','feature flags','instant preview'] },
+    { Icon: Users,        color: '#A06535', title: 'Employee Roster & Profiles',  desc: 'Full employee directory with search, department filter, performance score, hire date, and full profile with edit modal.', tags: ['directory search','full profiles','attendance %'] },
+    { Icon: Key,          color: '#6B7D6B', title: 'Dev Request Portal',          desc: 'Submit feature requests directly to GCW. Track status, priority, and estimated delivery. Your portal evolves with your needs.', tags: ['direct to GCW','track status','custom builds'] },
+  ]
+
+  const plans = [
+    { name: 'Starter',      price: 59,  limit: 'Up to 15 employees', color: '#6B7D6B', features: ['All core HR modules','Digital onboarding','Policy sign-offs','Timesheets & time off','Employee handbook','Memos & messaging','Document library','Email support'] },
+    { name: 'Professional', price: 129, limit: 'Up to 50 employees',  color: '#A06535', popular: true, features: ['Everything in Starter','Performance tracking','Team calendar','Visitor kiosk','Role management','Priority support','Client config panel','Custom branding'] },
+    { name: 'Growth',       price: 179, limit: 'Up to 100 employees', color: '#4A7C59', features: ['Everything in Professional','IT change management','Daily work logs','Dev request portal','Advanced reporting','Dedicated onboarding','SLA support'] },
+    { name: 'Enterprise',   price: 299, limit: '100-150 employees',   color: '#3D3530', features: ['Everything in Growth','Custom feature requests','White-label options','API access','Custom integrations','Account manager'] },
+  ]
+
+  const addons = [
+    { name: 'Collective Services', price: '+$29/mo', desc: 'IT & Facilities helpdesk, change management, and work logs.',          premium: true },
+    { name: 'Collective Campus',   price: '+$29/mo', desc: 'Room and space scheduling for shared workspaces.',                     premium: true },
+    { name: 'HR Document Pack',    price: '+$29/mo', desc: '10 pre-built HR templates - handbook, PTO policy and more.',           premium: true },
+    { name: 'Collective Time',     price: '+$19/mo', desc: 'GPS clock-in, shift scheduling, and payroll export.',                  premium: false },
+    { name: 'Payroll Export',      price: '+$19/mo', desc: 'Export hours and earnings to QuickBooks, Gusto, or CSV.',              premium: false },
+    { name: 'e-Signature Pro',     price: '+$19/mo', desc: 'Legally binding signatures with timestamp and audit trail.',           premium: false },
+    { name: 'GCW Managed Setup',   price: '$249 once', desc: 'White-glove setup: GCW configures everything for your team.',       premium: false },
   ]
 
   return (
@@ -43,48 +51,38 @@ export default function Platform() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-delay-1 { transition-delay: 0.1s; } .reveal-delay-2 { transition-delay: 0.2s; } .reveal-delay-3 { transition-delay: 0.3s; }
         .primary-btn { background: #A06535; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         .primary-btn:hover { background: #B8734A; transform: translateY(-1px); }
         .outline-btn { background: transparent; color: #A06535; border: 1.5px solid #A06535; border-radius: 8px; padding: 11px 24px; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .tab-btn { padding: 10px 28px; border: none; border-radius: 8px; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .tab-active { background: #A06535; color: #fff; }
-        .tab-inactive { background: transparent; color: rgba(43,43,43,0.5); }
-        .tab-inactive:hover { color: #A06535; }
         .feature-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 12px; padding: 1.25rem; transition: all 0.2s; }
         .feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(43,43,43,0.08); }
         .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 500; background: #F7F2EB; color: #6B7D6B; margin: 2px; }
-        .plan-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 16px; padding: 2rem; transition: all 0.25s; }
+        .plan-card { background: #fff; border: 1px solid #EDE6DA; border-radius: 16px; padding: 2rem; transition: all 0.25s; position: relative; }
         .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(43,43,43,0.08); }
         .check-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 12px; color: #4A4A4A; }
       `}</style>
 
       <GCWNav />
 
-      {/* Header */}
       <div style={{ background: '#3D3530', padding: '3.5rem 2rem', textAlign: 'center' }}>
         <div style={{ maxWidth: 680, margin: '0 auto' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>Collective Staff</div>
           <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.8rem', fontWeight: 700, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>18 features. One portal.</h1>
-          <p style={{ fontSize: 14, color: 'rgba(217,195,163,0.55)', lineHeight: 1.8, marginBottom: '2rem' }}>Everything included — no modules to unlock, no features to pay for.</p>
-          {/* Tabs */}
+          <p style={{ fontSize: 14, color: 'rgba(217,195,163,0.55)', lineHeight: 1.8, marginBottom: '2rem' }}>Everything included - no modules to unlock, no features to pay for.</p>
           <div style={{ display: 'inline-flex', gap: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 10, padding: 4 }}>
-            <button className={`tab-btn ${activeTab==='features' ? 'tab-active' : 'tab-inactive'}`} onClick={() => setActiveTab('features')}>Features</button>
-            <button className={`tab-btn ${activeTab==='pricing' ? 'tab-active' : 'tab-inactive'}`} style={{ color: activeTab==='pricing' ? '#fff' : 'rgba(217,195,163,0.5)' }} onClick={() => setActiveTab('pricing')}>Pricing</button>
+            <button onClick={() => setTab('features')} style={{ padding: '10px 28px', border: 'none', borderRadius: 8, fontFamily: 'Montserrat, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', background: tab==='features' ? '#A06535' : 'transparent', color: tab==='features' ? '#fff' : 'rgba(217,195,163,0.5)' }}>Features</button>
+            <button onClick={() => setTab('pricing')}  style={{ padding: '10px 28px', border: 'none', borderRadius: 8, fontFamily: 'Montserrat, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', background: tab==='pricing'  ? '#A06535' : 'transparent', color: tab==='pricing'  ? '#fff' : 'rgba(217,195,163,0.5)' }}>Pricing</button>
           </div>
         </div>
       </div>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '3rem 2rem' }}>
 
-        {/* FEATURES TAB */}
-        {activeTab === 'features' && (
-          <div key='ft'>
+        {tab === 'features' && (
+          <div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: '2.5rem' }}>
-              {features.map((f, i) => (
-                <div key={f.title} className="feature-card reveal">
+              {features.map(f => (
+                <div key={f.title} className="feature-card">
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '0.75rem' }}>
                     <div style={{ width: 36, height: 36, borderRadius: 8, background: f.color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <f.Icon size={18} color={f.color} strokeWidth={1.75} />
@@ -99,25 +97,23 @@ export default function Platform() {
             <div style={{ background: '#3D3530', borderRadius: 12, padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
               <div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Need something specific?</div>
-                <div style={{ fontSize: 12, color: 'rgba(217,195,163,0.5)' }}>Every plan includes the Dev Request Portal — submit feature requests directly to the GCW team.</div>
+                <div style={{ fontSize: 12, color: 'rgba(217,195,163,0.5)' }}>Every plan includes the Dev Request Portal - submit feature requests directly to the GCW team.</div>
               </div>
               <button className="primary-btn" onClick={() => window.open('https://collectivestaff.app/demo','_blank')}>Try the Demo</button>
             </div>
           </div>
         )}
 
-        {/* PRICING TAB */}
-        {activeTab === 'pricing' && (
-          <div key='pt'>
+        {tab === 'pricing' && (
+          <div>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Simple Pricing</div>
               <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#2B2B2B', marginBottom: 8 }}>No surprises. No hidden fees.</h2>
               <p style={{ fontSize: 13, color: '#6B7D6B' }}>Month-to-month. Cancel anytime. All plans include a free setup call with the GCW team.</p>
             </div>
-
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: '2.5rem' }}>
               {plans.map(plan => (
-                <div key={plan.name} className="plan-card" style={{ borderTop: '3px solid ' + plan.color, position: 'relative' }}>
+                <div key={plan.name} className="plan-card" style={{ borderTop: '3px solid ' + plan.color }}>
                   {plan.popular && <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: '#A06535', color: '#fff', fontSize: 9, fontWeight: 700, padding: '3px 12px', borderRadius: 20, whiteSpace: 'nowrap' }}>MOST POPULAR</div>}
                   <div style={{ fontSize: 12, fontWeight: 700, color: plan.color, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{plan.name}</div>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginBottom: 4 }}>
@@ -135,8 +131,6 @@ export default function Platform() {
                 </div>
               ))}
             </div>
-
-            {/* Add-ons */}
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: '#A06535', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 6 }}>Premium Add-Ons</div>
               <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: '#2B2B2B', marginBottom: 8 }}>Enhance your plan</h2>
@@ -156,7 +150,6 @@ export default function Platform() {
                 </div>
               ))}
             </div>
-
             <div style={{ background: '#3D3530', borderRadius: 16, padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
               <div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: 4 }}>Ready to get started?</div>
@@ -169,8 +162,8 @@ export default function Platform() {
             </div>
           </div>
         )}
-      </div>
 
+      </div>
       <GCWFooter />
     </div>
   )
