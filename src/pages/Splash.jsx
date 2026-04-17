@@ -40,8 +40,13 @@ export default function Splash() {
       <div class="corner-mark corner-br"></div>
 
       {/* Logo */}
-      <div className="reveal" style={{ marginBottom: '2.5rem' }}>
-        <img src="/gcw-logo-transparent.png" alt="Gallagher Collective Works" style={{ width: 340, maxWidth: '80vw', objectFit: 'contain', mixBlendMode: 'multiply' }} />
+      <div className="reveal" style={{ marginBottom: '2.5rem', position: 'relative', display: 'inline-block' }}>
+        {/* Corner frame */}
+        <div style={{ position: 'absolute', top: -10, left: -10, width: 24, height: 24, borderTop: '2px solid #A06535', borderLeft: '2px solid #A06535', opacity: 0.7 }} />
+        <div style={{ position: 'absolute', top: -10, right: -10, width: 24, height: 24, borderTop: '2px solid #A06535', borderRight: '2px solid #A06535', opacity: 0.7 }} />
+        <div style={{ position: 'absolute', bottom: -10, left: -10, width: 24, height: 24, borderBottom: '2px solid #A06535', borderLeft: '2px solid #A06535', opacity: 0.7 }} />
+        <div style={{ position: 'absolute', bottom: -10, right: -10, width: 24, height: 24, borderBottom: '2px solid #A06535', borderRight: '2px solid #A06535', opacity: 0.7 }} />
+        <img src="/gcw-logo.png" alt="Gallagher Collective Works" style={{ width: 340, maxWidth: '80vw', objectFit: 'contain', borderRadius: 4 }} />
       </div>
 
       {/* Tagline */}
