@@ -41,7 +41,7 @@ export default function Splash() {
 
       {/* Logo */}
       <div className="reveal" style={{ marginBottom: '2.5rem' }}>
-        <img src="/gcw-logo.png" alt="Gallagher Collective Works" style={{ width: 340, maxWidth: '80vw', objectFit: 'contain' }} />
+        <img src="/gcw-logo 1.png" alt="Gallagher Collective Works" style={{ width: 340, maxWidth: '80vw', objectFit: 'contain', mixBlendMode: 'multiply' }} />
       </div>
 
       {/* Tagline */}
