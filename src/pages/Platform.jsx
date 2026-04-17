@@ -25,33 +25,6 @@ export default function Platform() {
     { Icon: ClipboardList,color: '#A06535', title: 'Timesheet Submission',         desc: 'Employees submit weekly timesheets from any device. Managers approve or send back with one click. Full OT visibility.',           tags: ['weekly submit','approve/deny','export ready'] },
     { Icon: Calendar,     color: '#6B7D6B', title: 'Time Off Requests',            desc: 'Employees request PTO, sick, or personal time. Managers see full balances, approve with one click, and track history.',           tags: ['PTO tracking','balance alerts','approval flow'] },
     { Icon: MessageSquare,color: '#A06535', title: 'Memos & Messaging',            desc: 'Send company-wide or targeted memos with read receipts. Urgent memos display as a full-screen banner on every dashboard.',        tags: ['read receipts','urgent banners','announcements'] },
-    { Icon: FolderOpen,   color: '#6B7D6B', title: 'Document Library',            desc: 'Upload SOPs, forms, and handbooks. Require signatures. Add to onboarding. Track who has signed what — all in one place.',         tags: ['require signature','onboarding flow','audit trail'] },
-    { Icon: BarChart2,    color: '#A06535', title: 'Performance Tracking',         desc: 'Log reviews, ratings, and notes per employee. Flag warnings or add recognition. Full history searchable and exportable.',         tags: ['reviews','warnings log','recognition'] },
-    { Icon: Headphones,   color: '#6B7D6B', title: 'Collective Services Helpdesk', desc: 'Full IT and Facilities ticket queues with 5-status workflow, priority levels, escalation to change requests, and work logs.',     tags: ['IT queue','facilities queue','change requests'] },
-    { Icon: GitBranch,    color: '#A06535', title: 'IT Change Management',         desc: 'Kanban-based change request workflow with approval stages, rollback plans, linked tickets, and daily IT work logs.',              tags: ['kanban board','rollback plans','work logs'] },
-    { Icon: FileCheck,    color: '#6B7D6B', title: 'IT Daily Work Log',            desc: 'IT staff log daily activity, linked to tickets and change requests. Managers see full workload visibility across the team.',       tags: ['daily logging','ticket links','manager view'] },
-    { Icon: Calendar,     color: '#A06535', title: 'Team & Employee Calendars',    desc: '9 event types, full CRUD, month/week/list views. Employees see company events, PTO approvals, birthdays, and deadlines.',          tags: ['9 event types','company-wide','personal reminders'] },
-    { Icon: Palette,      color: '#6B7D6B', title: 'Custom Branding',              desc: 'Upload your logo, set your colors, and configure your sidebar. The portal looks and feels like your company — not a generic tool.', tags: ['logo upload','brand colors','live preview'] },
-    { Icon: Smartphone,   color: '#A06535', title: 'Mobile Responsive',            desc: 'Bottom navigation bar on mobile. All pages optimized for phones. Employees can clock in, request time off, and read memos on the go.', tags: ['bottom nav','phone optimized','fully functional'] },
-    { Icon: Settings,     color: '#6B7D6B', title: 'Client Config Panel',          desc: 'Admins configure documents, feature flags, branding, and onboarding flow without any developer involvement.',                    tags: ['no-code config','feature flags','instant preview'] },
-    { Icon: Users,        color: '#A06535', title: 'Employee Roster & Profiles',   desc: 'Full employee directory with search, department filter, performance score, hire date, and full profile with edit modal.',          tags: ['directory search','full profiles','attendance %'] },
-    { Icon: Key,          color: '#6B7D6B', title: 'Dev Request Portal',           desc: 'Submit feature requests directly to GCW. Track status, priority, and estimated delivery. Your portal evolves with your needs.',   tags: ['direct to GCW','track status','custom builds'] },
-  ]
-
-  const plans = [
-    { name: 'Starter',      price: 59,  limit: 'Up to 15 employees', color: '#6B7D6B', features: ['All core HR modules','Digital onboarding','Policy sign-offs','Timesheets & time off','Employee handbook','Memos & messaging','Document library','Email support'] },
-    { name: 'Professional', price: 129, limit: 'Up to 50 employees',  color: '#A06535', popular: true, features: ['Everything in Starter','Performance tracking','Team calendar','Visitor kiosk','Role management','Priority support','Client config panel','Custom branding'] },
-    { name: 'Growth',       price: 179, limit: 'Up to 100 employees', color: '#4A7C59', features: ['Everything in Professional','IT change management','Daily work logs','Dev request portal','Advanced reporting','Dedicated onboarding','SLA support'] },
-    { name: 'Enterprise',   price: 299, limit: '100-150 employees',   color: '#3D3530', features: ['Everything in Growth','Custom feature requests','White-label options','API access','Custom integrations','Account manager'] },
-  ]
-
-  const addons = [
-    { Icon: Headphones, color: '#A06535', name: 'Collective Services', price: '+$29/mo', desc: 'IT & Facilities helpdesk, change management, and work logs.', premium: true },
-    { Icon: Building,   color: '#6B7D6B', name: 'Collective Campus',   price: '+$29/mo', desc: 'Room and space scheduling for shared workspaces.',           premium: true },
-    { Icon: Timer,      color: '#8A7A6A', name: 'Collective Time',     price: '+$19/mo', desc: 'GPS clock-in, shift scheduling, and payroll export.',         premium: false },
-    { Icon: Users,      color: '#4A7C59', name: 'Payroll Export',      price: '+$19/mo', desc: 'Export hours & earnings to QuickBooks, Gusto, or CSV.',       premium: false },
-    { Icon: FileText,   color: '#6B7D6B', name: 'e-Signature Pro',     price: '+$19/mo', desc: 'Legally binding signatures with timestamp & audit trail.',    premium: false },
-    { Icon: FolderOpen, color: '#A06535', name: 'HR Document Pack',    price: '+$29/mo', desc: '10 pre-built HR templates — handbook, PTO policy & more.',    premium: true },
     { Icon: Users,      color: '#3D3530', name: 'GCW Managed Setup',   price: '$249 once', desc: 'White-glove setup: GCW configures everything for your team.', premium: false },
   ]
 
