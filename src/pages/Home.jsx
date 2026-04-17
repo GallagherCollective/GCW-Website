@@ -79,7 +79,7 @@ export default function Home() {
         <div className="reveal reveal-delay-2" style={{ position: 'relative' }}>
           <div className="float" style={{ background: '#fff', border: '1px solid #EDE6DA', borderRadius: 20, padding: '2rem', boxShadow: '0 16px 48px rgba(43,43,43,0.08)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: '1px solid #EDE6DA' }}>
-              <img src="/gcw-logo 1.png" alt="GCW" style={{ height: 40, objectFit: 'contain', background: 'transparent' }} />
+              <img src="/gcw-logo-transparent.png" alt="GCW" style={{ height: 40, objectFit: 'contain', background: 'transparent' }} />
               <div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 13, fontWeight: 600, color: '#2B2B2B', lineHeight: 1 }}>Gallagher Collective Works</div>
                 <div style={{ fontSize: 9, color: '#8A9E8A', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 2 }}>Built for Small Business Success</div>

@@ -75,7 +75,7 @@ export default function About() {
 
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: '3rem' }}>
-          {[['Ellsworth, ME','Based in Maine'],['20+','Years of Experience'],['2','Products Live'],['5-50','Employee Sweet Spot']].map(([val, label]) => (
+          {[['Ellsworth, ME','Based in Maine'],['2','Co-Owners'],['20+','Years of Experience'],['5-50','Employee Sweet Spot']].map(([val, label]) => (
             <div key={label} className="reveal reveal-delay-1" style={{ background: '#fff', border: '1px solid #EDE6DA', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
               <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', color: '#B8734A', fontWeight: 700, lineHeight: 1, marginBottom: 6 }}>{val}</div>
               <div style={{ fontSize: 11, color: '#8A9E8A', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</div>
