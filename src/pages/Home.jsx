@@ -66,7 +66,7 @@ export default function Home() {
             <button className="outline-btn" onClick={() => navigate('/services')}>Our Services</button>
           </div>
           <div className="reveal reveal-delay-4" style={{ display: 'flex', gap: 32 }}>
-            {[['20+', 'Years of Experience'], ['Maine', 'Based & Built'], ['5-50', 'Employee Sweet Spot']].map(([val, label]) => (
+            {[['20+', 'Years of Experience'], ['Maine', 'Based & Built'], ['5-100', 'Employee Sweet Spot']].map(([val, label]) => (
               <div key={label} style={{ textAlign: 'center' }}>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', color: '#A06535', fontWeight: 700, lineHeight: 1 }}>{val}</div>
                 <div style={{ fontSize: 11, color: '#8A9E8A', marginTop: 3, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</div>
@@ -79,7 +79,7 @@ export default function Home() {
         <div className="reveal reveal-delay-2" style={{ position: 'relative' }}>
           <div className="float" style={{ background: '#fff', border: '1px solid #EDE6DA', borderRadius: 20, padding: '2rem', boxShadow: '0 16px 48px rgba(43,43,43,0.08)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: '1px solid #EDE6DA' }}>
-              <img src="/gcw-logo-transparent.png" alt="GCW" style={{ height: 40, objectFit: 'contain', background: 'transparent' }} />
+              <img src="/gcw-logo.png" alt="GCW" style={{ height: 40, objectFit: 'contain', background: 'transparent' }} />
               <div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 13, fontWeight: 600, color: '#2B2B2B', lineHeight: 1 }}>Gallagher Collective Works</div>
                 <div style={{ fontSize: 9, color: '#8A9E8A', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 2 }}>Built for Small Business Success</div>
@@ -104,7 +104,10 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #EDE6DA', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ marginTop: '0.75rem', padding: '8px', borderRadius: 8, background: 'rgba(160,101,53,0.08)', border: '1px solid rgba(160,101,53,0.2)', textAlign: 'center' }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#A06535', letterSpacing: '0.05em' }}>+ And much more</span>
+            </div>
+            <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid #EDE6DA', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ fontSize: 11, color: '#6B7D6B', fontStyle: 'italic' }}>Built to Work. Made for You.</div>
               <button style={{ background: '#A06535', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 10, fontWeight: 600, cursor: 'pointer', fontFamily: "'Montserrat', sans-serif" }} onClick={() => window.open('https://collectivestaff.app/demo', '_blank')}>Try Demo</button>
             </div>
