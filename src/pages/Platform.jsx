@@ -14,7 +14,17 @@ export default function Platform() {
       { threshold: 0.1 }
     )
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
+    const addons = [
+    { Icon: Headphones, color: '#A06535', name: 'Collective Services', price: '+$29/mo', desc: 'IT & Facilities helpdesk, change management, and work logs.', premium: true },
+    { Icon: Building,   color: '#6B7D6B', name: 'Collective Campus',   price: '+$29/mo', desc: 'Room and space scheduling for shared workspaces.',           premium: true },
+    { Icon: FolderOpen, color: '#A06535', name: 'HR Document Pack',    price: '+$29/mo', desc: '10 pre-built HR templates - handbook, PTO policy & more.',   premium: true },
+    { Icon: Timer,      color: '#8A7A6A', name: 'Collective Time',     price: '+$19/mo', desc: 'GPS clock-in, shift scheduling, and payroll export.',        premium: false },
+    { Icon: Users,      color: '#4A7C59', name: 'Payroll Export',      price: '+$19/mo', desc: 'Export hours & earnings to QuickBooks, Gusto, or CSV.',      premium: false },
+    { Icon: FileText,   color: '#6B7D6B', name: 'e-Signature Pro',     price: '+$19/mo', desc: 'Legally binding signatures with timestamp & audit trail.',   premium: false },
+    { Icon: Users,      color: '#3D3530', name: 'GCW Managed Setup',   price: '$249 once', desc: 'White-glove setup: GCW configures everything for your team.', premium: false },
+  ]
+
+  return () => observer.disconnect()
   }, [])
 
   const features = [
